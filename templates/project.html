@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block site_title %}{{ this.name }}{% endblock %}
+{% block body %}
+  <section class="section">
+    <div class="container">
+      <div class="content">
+        <h1 class="title">
+          {{ this.name }}
+        </h1>
+        {{ this.description }}
+      </div>
+      <div class="comments">
+        {{ render_disqus_comments() }}
+      </div>
+    </div>
+  </section>
+{% endblock %}

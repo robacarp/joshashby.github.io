@@ -1,0 +1,12 @@
+[project]
+name = joshisa.ninja
+
+[servers.production]
+enabled = yes
+name = Production
+target = ghpages://JoshAshby/joshashby.github.io
+default = yes
+
+[packages]
+lektor-disqus-comments = 0.2
+lektor-webpack-support = 0.1

@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block site_title %}{{ this.title }}{% endblock %}
+{% block page_title %}{{ this.title }}{% endblock %}
+{% block page_subtitle %}{{ this.author }} - {{ this.date }}{% endblock %}
+{% block body %}
+  <section class="section">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-quarter">
+        </div>
+        <div class="column is-half">
+          <div class="content">
+            {{ this.body }}
+          </div>
+          {% if this.finished %}
+          <div class="comments">
+            {{ render_disqus_comments() }}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

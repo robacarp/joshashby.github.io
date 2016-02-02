@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block site_title %}{{ this.title }}{% endblock %}
+{% block body %}
+  <section class="section">
+    <div class="container">
+      <div class="content">
+        <h1 class="title">
+          {{ this.title }}
+        </h1>
+        <h2 class="subtitle">
+          {{ this.subtitle }}
+        </h2>
+        {{ this.body }}
+      </div>
+    </div>
+  </section>
+{% endblock %}
