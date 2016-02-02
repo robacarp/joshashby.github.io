@@ -2,9 +2,9 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="{{ '/static/styles.css'|asseturl }}">
+<link rel="stylesheet" href="../../../static/styles.css?h=8fc2cf8c">
 
-<title>{% block site_title %}Hello{% endblock %} | joshisa.ninja</title>
+<title>Project Category: Personal Health | joshisa.ninja</title>
 <body>
   <section class="hero is-left is-bold">
   <div class="hero-header">
@@ -12,7 +12,7 @@
       <div class="container">
         <div class="header-left header-menu">
           <span class="header-item">
-            <a class="{% if this.is_child_of('/') %}is-active{% endif %}" href="/">Home</a>
+            <a class="" href="/">Home</a>
           </span>
         </div>
 
@@ -34,10 +34,10 @@
     <div class="hero-content">
       <div class="container">
         <h1 class="title">
-          {% block page_title %}Joshisa.ninja{% endblock %}
+          Joshisa.ninja
         </h1>
         <h2 class="subtitle">
-          {% block page_subtitle %}Ninja Cactus{% endblock %}
+          Ninja Cactus
         </h2>
       </div>
     </div>
@@ -46,34 +46,57 @@
       <div class="tabs">
         <div class="container">
           <ul>
-            {% for id, item in bag('nav-tabs').iteritems() %}
-              <li{% if this.is_child_of(item.path) %} class="is-active" {% endif %}>
-                <a href="{{ item.path|url }}">{{ item.label }}</a>
+            
+              <li>
+                <a href="../../../projects/">Projects</a>
               </li>
-            {% endfor %}
+            
+              <li>
+                <a href="../../../stories/">Stories</a>
+              </li>
+            
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  {% block body %}{% endblock %}
+  
+  <section class="section">
+    <div class="container">
+      <div class="content">
+        <h1 class="title">
+          Project Category: Personal Health
+        </h1>
+        
+  <ul>
+  
+    <li>
+      <a href="../../../projects/mental-tracking/">Mental Tracking</a> - Tracking how I feel each day to better under stand myself.
+    </li>
+  
+  </ul>
 
-  {% block footer %}
+      </div>
+    </div>
+  </section>
+
+
+  
   <footer class="footer">
     <div class="container">
       <div class="content is-centered">
         <p>
           <strong>joshisa.ninja</strong> by <a href="http://github.com/JoshAshby">Josh Ashby</a>.
           The content is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC ANS 4.0</a> unless otherwise noted.
-          <a class="icon" href="https://github.com/joshashby/joshashby.github.io/tree/master/content{{ this.path.split('@')[0]}}/contents.lr">
+          <a class="icon" href="https://github.com/joshashby/joshashby.github.io/tree/master/content/project-categories/personal-health/contents.lr">
             <i class="fa fa-github"></i>
           </a>
         </p>
       </div>
     </div>
   </footer>
-  {% endblock %}
+  
 
-  <script type=text/javascript src="{{ '/static/app.js'|asseturl }}" charset="utf-8"></script>
+  <script type=text/javascript src="../../../static/app.js?h=56f85b4f" charset="utf-8"></script>
 </body>

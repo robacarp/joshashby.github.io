@@ -1,9 +1,0 @@
-{% macro render_stories_list(stories) %}
-  <ul>
-  {% for story in stories %}
-    <li>
-      <a href="{{ story|url }}">{{ story.title }}</a> - {{ story.date }}
-    </li>
-  {% endfor %}
-  </ul>
-{% endmacro %}
