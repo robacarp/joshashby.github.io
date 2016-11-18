@@ -86,6 +86,7 @@
   </section>
 
   
+
   <section class="hero is-danger">
     <div class="hero-body has-text-centered">
       <div class="container">
@@ -98,6 +99,7 @@
       </div>
     </div>
   </section>
+
 
 
   <div id="body">
@@ -116,7 +118,9 @@
 <li><a href="https://www.amazon.com/gp/product/B00CP1QLSC">9v Supply for the Breadboard power supply</a></li>
 </ul>
 <p>All of my regulators are 5v, except for a bunch of SMD 3.3v ones, which I want to save for final project boards, so I figured the breadboard 3.3v supply wasn't too bad.</p>
-<p>A week of deliveries went by and suddenly I had all the parts and it was time to start building things. I plugged one of the boards into the "USB Programmer", installed a macOS driver for the CH340G USB-&gt;UART chip on the board from a site that was entirely in Chinese and fired up good old <code>screen /dev/tty.wchusbserial1420 115200</code></p>
+<p>A week of deliveries went by and suddenly I had all the parts and it was time to start building things. I plugged one of the boards into the "USB Programmer", installed a macOS driver for the CH340G USB-&gt;UART chip on the board from a site that was entirely in Chinese and fired up good old <code>screen</code></p>
+<pre><code>screen /dev/tty.wchusbserial1420 115200
+</code></pre>
 <p>115200 is the default baud rate for the stock firmware. The bootloader spits out some log messages at a baud of 74880 which is what all initial garbage is ...</p>
 
     </div>
@@ -138,7 +142,10 @@
     <div class="content">
       <p>Uh ... Okay, not sure what that <code>invalid</code> is about, but hey the AT commands seem to work just fine so let's get cracking with flashing the NodeMCU firmware. I should note that at this time my <code>screen</code> doesn't support a baud of 74880 so I wasn't able to see what this boot log was (more on this later on).</p>
 <p>Note: This is where my biggest amount of time was spent running in circles and banging my head against the wall, because I had an awful time finding documentation about any of the problems I was hitting.</p>
-<p>Reading up on how to <a href="../../../../posts/2016/11/esp8266-adventures-part-1/">flash the chips</a> with NodeMCU, it looked like this was going to be a super easy task, I should just be able to git clone the <a href="https://github.com/espressif/esptool">esptool.py</a> repository, use the NodeMCU cloud build service to get a binary to flash, and issue the command <code>esptool.py --port /dev/tty.wchusbserial1420 write_flash 0x00000 ~/Downloads/nodemcu-master-10-modules-2016-11-16-04-29-18-integer.bin</code> and it'd all be perfect</p>
+<p>Reading up on how to <a href="https://nodemcu.readthedocs.io/en/master/en/flash/">flash the chips</a> with NodeMCU, it looked like this was going to be a super easy task, I should just be able to git clone the <a href="https://github.com/espressif/esptool">esptool.py</a> repository, use the NodeMCU cloud build service to get a binary to flash, and issue the command</p>
+<pre><code>esptool.py --port /dev/tty.wchusbserial1420 write_flash 0x00000 ~/Downloads/nodemcu-master-10-modules-2016-11-16-04-29-18-integer.bin
+</code></pre>
+<p>and it'd all be perfect</p>
 
     </div>
   </div>
@@ -210,7 +217,9 @@
   <div class="container">
     <div class="content">
       <p>Crafty observers will note the timestamps on those are the same :D This is because I don't have any screenshots from my first two nights of this, so I had to recreate them just now.</p>
-<p>This time the flash went a lot better, so now it was time to check out what this looks like. Theoretically I should have been able to connect with screen to the chip using a similar command as before, sticking to the 115200 baud rate <code>screen /dev/tty.usbserial-A6007tf5 115200</code></p>
+<p>This time the flash went a lot better, so now it was time to check out what this looks like. Theoretically I should have been able to connect with screen to the chip using a similar command as before, sticking to the 115200 baud rate</p>
+<pre><code>screen /dev/tty.usbserial-A6007tf5 115200
+</code></pre>
 
     </div>
   </div>
