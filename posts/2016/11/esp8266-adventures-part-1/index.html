@@ -1,0 +1,298 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../../../../static/styles.css?h=d80928b6">
+
+
+  <style>
+    .banner {
+      padding: 0;
+    }
+
+    .banner > #banner-overlay {
+      top: -7em;
+      background: rgb(0, 0, 0);
+      background: rgba(0, 0, 0, 0.8);
+      padding: 10px;
+    }
+  </style>
+
+
+<title>ESP8266 Adventures - Part 1 | joshisa.ninja</title>
+<body>
+  
+  <section class="hero 
+  is-dark
+">
+    <div class="hero-head">
+      <header class="nav">
+        <div class="container">
+          <div class="nav-left">
+            <span class="nav-item">
+              <a class="is-active" href="/">Home</a>
+            </span>
+          </div>
+
+          <div class="nav-center">
+          </div>
+
+          <div class="nav-right">
+            <span class="nav-item">
+              <a href="https://travis-ci.org/JoshAshby/joshashby.github.io">
+                <img src="https://img.shields.io/travis/JoshAshby/joshashby.github.io.svg?style=flat-square">
+              </a>
+            </span>
+          </div>
+        </div>
+      </header>
+    </div>
+
+    
+  <div class="hero-body has-text-centered banner">
+    <img id="banner-image" src="../../../../posts/2016/11/esp8266-adventures-part-1/20161117_224724.jpg" alt="banner" />
+    <div class="container" id="banner-overlay">
+      <h1 class="title" id="title">
+        ESP8266 Adventures - Part 1
+      </h1>
+      <h2 class="subtitle">
+        Joshua Ashby - 11/17/16
+      </h2>
+    </div>
+  </div>
+
+
+    <div class="hero-foot">
+      <div class="tabs is-boxed is-fullwidth">
+        <div class="container">
+          <ul>
+            
+              <li class="is-active" >
+                <a href="../../../../posts/">Blog Posts</a>
+              </li>
+            
+              <li>
+                <a href="../../../../projects/">Projects</a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <section class="hero is-danger">
+    <div class="hero-body has-text-centered">
+      <div class="container">
+        <h1 class="title">
+          DRAFT
+        </h1>
+        <h2 class="subtitle">
+          This post is incomplete and only a DRAFT
+        </h2>
+      </div>
+    </div>
+  </section>
+
+
+
+  <div id="body">
+    
+  <section class="section">
+  <div class="container">
+    <div class="content">
+      <p>Recently a friend of mine pointed me towards the ESP8266 chips. These guys look pretty neat: 32-bit RISC chips with built in wifi capabilities and some interesting low-power stuff. Overall they seem like a perfect fit for the IoT field, and they seem to have an okay community around them which has provided a few different options for programming them: <a href="https://micropython.org/">MicroPython</a>, <a href="https://nodemcu.readthedocs.io/en/master/">NodeMCU (Lua 5.1)</a>, <a href="https://www.espruino.com/">Espruino (Javascript)</a> and even the <a href="https://github.com/esp8266/Arduino">Arduino Core</a>. With how neat the chip looked, and the potential of an easy to work with µc with built in wifi I figured this was a good way to get back into electronics after my short hiatus.</p>
+<p>First up I did some research on all the different alternative firmwares, and while the prospect of Python on a microcontroller was appealing, I decided that I wanted to check out the NodeMCU project and run Lua because ... well ... I just liked the sound of running Lua on a µc, plus it seems to have some nice adoption. With all that in mind I looked at the different offerings for <a href="http://www.esp8266.com/wiki/doku.php?id=esp8266-module-family">the chips</a> and decided to go with the ESP-01 which breaks out only 8 pins: VCC, GND, RST, CH_PD (Chip Power-down), UART0 TX and RX, and two GPIO pins, GPIO0 and GPIO2. I chose this board because my goal was to look into making some nice single purpose sensors, and these guys are fit for the job with such limited pins.</p>
+<p>With all this in mind I went hunting and ended up discovering the first odd thing about the chips: the primary source seems to be eBay, Amazon, BangGood and AliExpress. So I stuck with Amazon and got a 4 pack of the ESP-01 with 1MB flash memory, along with a few other bits to hopefully make life a bit easier:</p>
+<ul>
+<li><a href="https://www.amazon.com/Makerfire-ESP8266-Serial-Wireless-Transceiver/dp/B01EA3UJJ4">4 Pack ESP-01</a></li>
+<li><a href="https://www.amazon.com/gp/product/B01JZ07FXK">"USB Programmer"</a></li>
+<li><a href="https://www.amazon.com/gp/product/B00YMRLTHA/">Breadboard Adapter</a></li>
+<li><a href="https://www.amazon.com/gp/product/B01ELAGIO6">Breadboard 3.3v/5v supply</a></li>
+<li><a href="https://www.amazon.com/gp/product/B00CP1QLSC">9v Supply for the Breadboard power supply</a></li>
+</ul>
+<p>All of my regulators are 5v, except for a bunch of SMD 3.3v ones, which I want to save for final project boards, so I figured the breadboard 3.3v supply wasn't too bad.</p>
+<p>A week of deliveries went by and suddenly I had all the parts and it was time to start building things. I plugged one of the boards into the "USB Programmer", installed a macOS driver for the CH340G USB-&gt;UART chip on the board from a site that was entirely in Chinese and fired up good old <code>screen</code></p>
+<pre><code>screen /dev/tty.wchusbserial1420 115200
+</code></pre>
+<p>115200 is the default baud rate for the stock firmware. The bootloader spits out some log messages at a baud of 74880 which is what all initial garbage is ...</p>
+
+    </div>
+  </div>
+</section>
+
+<section class="hero">
+  <div class="hero-body has-text-centered" style="padding: 0px;">
+
+    <a href="esptool-screen-2016-11-17-22-26-57.png">
+      <img src="esptool-screen-2016-11-17-22-26-57.png" alt="esptool-screen-2016-11-17-22-26-57.png">
+    </a>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="content">
+      <p>Uh ... Okay, not sure what that <code>invalid</code> is about, but hey the AT commands seem to work just fine so let's get cracking with flashing the NodeMCU firmware. I should note that at this time my <code>screen</code> doesn't support a baud of 74880 so I wasn't able to see what this boot log was (more on this later on).</p>
+<p>Note: This is where my biggest amount of time was spent running in circles and banging my head against the wall, because I had an awful time finding documentation about any of the problems I was hitting.</p>
+<p>Reading up on how to <a href="https://nodemcu.readthedocs.io/en/master/en/flash/">flash the chips</a> with NodeMCU, it looked like this was going to be a super easy task, I should just be able to git clone the <a href="https://github.com/espressif/esptool">esptool.py</a> repository, use the NodeMCU cloud build service to get a binary to flash, and issue the command</p>
+<pre><code>esptool.py --port /dev/tty.wchusbserial1420 write_flash 0x00000 ~/Downloads/nodemcu-master-10-modules-2016-11-16-04-29-18-integer.bin
+</code></pre>
+<p>and it'd all be perfect</p>
+
+    </div>
+  </div>
+</section>
+
+<section class="hero">
+  <div class="hero-body has-text-centered" style="padding: 0px;">
+
+    <a href="esptool-fish-2016-11-17-22-46-07.png">
+      <img src="esptool-fish-2016-11-17-22-46-07.png" alt="esptool-fish-2016-11-17-22-46-07.png">
+    </a>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="content">
+      <p>Oh ... okay, that didn't work. I read <a href="https://github.com/espressif/esptool#automatic-bootloader">this</a> which led me to believe that this would work, considering this "USB Programmer" bills itself as ... well a programmer. Apparently however it either doesn't support the DTR and RST control signals or this <code>esptool.py</code> doesn't know how to work with the USB-&gt;UART chip on it? Either way, I quickly gave up a threw together a breadboard based setup and used an 3.3v FTDI breakout board. I also added two push buttons, one for pulling the RST pin to GND, and the other for pulling GPIO0 to GND to allow me to manually reset the chip and put it into flash mode.</p>
+
+    </div>
+  </div>
+</section>
+
+
+  
+
+
+<section class="hero">
+  <div class="hero-body has-text-centered" style="padding: 0px;">
+
+  
+    
+      <a href="20161117_224724.jpg">
+        <img src="20161117_224724.jpg" style="height: 320px; width: auto" alt="">
+      </a>
+    
+  
+    
+      <a href="">
+        <img src="" style="height: 320px; width: auto" alt="">
+      </a>
+    
+  
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="content">
+      <p>With a good old proper looking setup, it was time to try flashing the NodeMCU firmware again. I had to hold the Flash button down, while pressing the Reset button, then letting go of the Flash button to get the chip into Flash mode, but that wasn't too bad of an experience.</p>
+
+    </div>
+  </div>
+</section>
+
+<section class="hero">
+  <div class="hero-body has-text-centered" style="padding: 0px;">
+
+    <a href="esptool-fish-2016-11-17-22-51-08.png">
+      <img src="esptool-fish-2016-11-17-22-51-08.png" alt="esptool-fish-2016-11-17-22-51-08.png">
+    </a>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="content">
+      <p>Crafty observers will note the timestamps on those are the same :D This is because I don't have any screenshots from my first two nights of this, so I had to recreate them just now.</p>
+<p>This time the flash went a lot better, so now it was time to check out what this looks like. Theoretically I should have been able to connect with screen to the chip using a similar command as before, sticking to the 115200 baud rate</p>
+<pre><code>screen /dev/tty.usbserial-A6007tf5 115200
+</code></pre>
+
+    </div>
+  </div>
+</section>
+
+<section class="hero">
+  <div class="hero-body has-text-centered" style="padding: 0px;">
+
+    <a href="esptool-fish-2016-11-17-22-54-43.png">
+      <img src="esptool-fish-2016-11-17-22-54-43.png" alt="esptool-fish-2016-11-17-22-54-43.png">
+    </a>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="content">
+      <p>Well.<br>
+Shit.</p>
+<p>That hadn't worked out nearly as well as I was expecting up to this point. No matter what I tried, changing bauds, flashing different firmware, erasing the flash and flashing again, the chip continued to spew this garbage across the wire.</p>
+
+    </div>
+  </div>
+</section>
+
+  
+  <section class="section">
+    <div class="container">
+      <div class="comments">
+        
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function() { this.page.identifier = "/posts/esp8266-adventures-part-1"; };
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = '//joshisaninja.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>
+  Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript"
+    rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+
+      </div>
+    </div>
+  </section>
+  
+
+  </div>
+
+  
+  <footer class="footer">
+    <div class="container">
+      <div class="content is-centered">
+        <p>
+          <strong>joshisa.ninja</strong> by <a href="http://github.com/JoshAshby">Josh Ashby</a>.
+          The content is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC ANS 4.0</a> unless otherwise noted.
+          <a class="icon" href="https://github.com/joshashby/joshashby.github.io/tree/lektor/content/posts/esp8266-adventures-part-1/contents.lr">
+            <i class="fa fa-github"></i>
+          </a>
+        </p>
+        <p>
+        Built with <a href="https://www.getlektor.com/">Lektor</a> and <a href="http://bulma.io/">Bulma</a> for the css. Deployed automatically with <a href="https://travis-ci.org/JoshAshby/joshashby.github.io">Travis.ci</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+  
+
+  <script type="text/javascript" src="../../../../static/app.js?h=56f85b4f" charset="utf-8"></script>
+  
+  <script type="text/javascript">
+    topPosition = document.getElementById( 'body' ).offsetTop;
+    window.scrollTo(0, topPosition-450);
+  </script>
+
+</body>
