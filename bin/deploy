@@ -13,5 +13,5 @@ echo "Uploading backup ${PACKAGE} to DO space ..."
 aws s3 cp $PACKAGE "s3://${DO_SPACE_NAME}/deploys/" --endpoint ${DO_SPACES_ENDPOINT}
 
 echo "Uploading site to DO space ..."
-aws s3 cp _site/* "s3://${DO_SPACE_NAME}/" --endpoint ${DO_SPACES_ENDPOINT}
+aws s3 cp _site/ "s3://${DO_SPACE_NAME}/" --recursive --endpoint ${DO_SPACES_ENDPOINT}
 
