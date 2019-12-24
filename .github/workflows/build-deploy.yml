@@ -24,6 +24,7 @@ jobs:
 
       - name: Install deps
         run: |
+          bundle update --bundler
           bundle install
           yarn install
 
