@@ -5,5 +5,5 @@ _site
 vendor
 node_modules
 yarn-error.log
-
+deploy-*.tar.gz
 .env
