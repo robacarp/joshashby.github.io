@@ -1,0 +1,17 @@
+<header class="container">
+  <nav id="main-nav">
+    <a href="/"><h1>{{ page.title }}</h1></a>
+
+    <!-- TODO: Turn into a data file? idk -->
+    <ul>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/photos/">Photos</a></li>
+      <li><a href="/posts/">Posts</a></li>
+      <li><a href="/resume/">Resume</a></li>
+
+      {% if ENV["JEKYLL_ENV"] != "production" %}
+      <li><a href="/admin/">Admin Home</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+</header>

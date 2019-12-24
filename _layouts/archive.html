@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+{% include head.html %}
+<body>
+  {% include nav.html %}
+  <main class="container">
+    {% if page.type == "year" %}
+    <h4>Archive of posts written in {{ page.date | date: "%Y" }}</h4>
+    {% elsif page.type == "month" %}
+    <h4>Archive of posts written in {{ page.date | date: "%Y-%h" }}</h4>
+    {% elsif page.type == "day" %}
+    <h4>Archive of posts written on {{ page.date | date: "%Y-%h-%d" }}</h4>
+    {% endif %}
+
+    <ul>
+      {% for post in page.posts %}
+        <li>
+          <time datetime="{{ post.date | date: "%F" }}">{{ post.date | date: "%Y-%h-%d" }}</time>
+          <a href="{{ post.url }}">{{ post.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+
+    {{ content }}
+  </main>
+</body>
+</html>
