@@ -27,7 +27,7 @@ jobs:
           bundle install
           yarn install
 
-      - name: Setup Database
+      - name: Build Jekyll site
         run: |
           bundle exec jekyll build
         env:
