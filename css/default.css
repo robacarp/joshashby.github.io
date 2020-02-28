@@ -3,4 +3,94 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 
+html, body {
+  @apply font-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-sans;
+}
+
+h1 {
+  @apply text-6xl mb-4;
+}
+
+h2 {
+  @apply text-5xl mb-3;
+}
+
+h3 {
+  @apply text-4xl mb-3;
+}
+
+h4 {
+  @apply text-3xl mb-2;
+}
+
+h5 {
+  @apply text-2xl mb-2;
+}
+
+h6 {
+  @apply text-xl mb-1;
+}
+
+p {
+  @apply py-2;
+}
+
+blockquote {
+  /* TODO: make this like <ol> and have the border hanging off the left */
+  @apply border-l-4 border-gray-900 my-6 py-2 px-4 italic;
+}
+
+img {
+  @apply mx-auto my-8;
+}
+
+/*figure, div.highlighter-rouge, code {*/
+  /*@apply py-4 font-mono;*/
+/*}*/
+
+a {
+  @apply text-blue-500 cursor-pointer;
+
+  &:hover, &:active, &:focus {
+    @apply text-blue-700;
+  }
+}
+
+a:visited {
+  @apply text-purple-700;
+}
+
+ol {
+  counter-reset: list;
+
+  & > li {
+    @apply my-3;
+
+    list-style-position: none;
+    position: relative;
+    list-style: none;
+
+    &:before {
+      @apply font-mono;
+
+      content: "[" counter(list, decimal) "] ";
+      counter-increment: list;
+    }
+  }
+}
+
+ul {
+  @apply list-disc;
+
+  padding: 0 20px 0 20px;
+
+  & > li {
+    margin: 5px 0 5px 0;
+  }
+}
+
 @tailwind utilities;

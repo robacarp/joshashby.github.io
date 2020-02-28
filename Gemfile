@@ -21,10 +21,13 @@ group :jekyll_plugins do
   # gem "github-pages"
 
   gem "jekyll-feed", "~> 0.12"
-  gem "jekyll-admin"
   gem "jekyll-sitemap"
   gem "jekyll-seo-tag"
+
   gem "jekyll-archives"
+
+  gem "jekyll-admin"
+
   gem "jekyll-postcss"
   gem "jekyll-purgecss"
 end

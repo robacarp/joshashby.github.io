@@ -35,10 +35,10 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-admin
+  - jekyll-archives
   - jekyll-postcss
   - jekyll-purgecss
-  - jekyll-archives
-  - jekyll-admin
 
 jekyll-archives:
   enabled:

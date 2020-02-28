@@ -3,7 +3,7 @@
 {% include head.html %}
 <body>
   {% include nav.html %}
-  <main class="container">
+  <main>
     {% if page.type == "year" %}
     <h4>Archive of posts written in {{ page.date | date: "%Y" }}</h4>
     {% elsif page.type == "month" %}
