@@ -1,0 +1,68 @@
+name: Build and deploy Jekyll site to GitHub Pages
+
+on:
+  push:
+    branches:
+      - source
+
+jobs:
+  github-pages:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          path: source
+
+      - uses: actions/checkout@v2
+        with:
+          ref: master
+          path: build
+
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '2.6'
+
+      - uses: actions/setup-node@v1
+        with:
+          ruby-version: '12.8.x'
+
+      - uses: actions/cache@v2
+        with:
+          path: source/vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+
+      - uses: actions/cache@v2
+        with:
+          path: source/node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      - name: Bundle install
+        working-directory: source
+        run: |
+          gem install bundler --no-document
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+
+      - name: Yarn install
+        working-directory: source
+        run: |
+          yarn install
+
+      - name: Jekyll Build
+        working-directory: source
+        run: JEKYLL_ENV=production bundle exec jekyll build -d ../build
+
+      - name: Commit and push changes to master
+        working-directory: build
+        run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git add .
+          git commit -m "Update GitHub pages from Jekyll build for commit ${GITHUB_SHA}"
+          git push origin master
+
