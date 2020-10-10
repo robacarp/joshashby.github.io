@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://joshisa.ninja/feed.xml" rel="self" type="application/atom+xml" /><link href="https://joshisa.ninja/" rel="alternate" type="text/html" /><updated>2020-10-10T19:02:46+00:00</updated><id>https://joshisa.ninja/feed.xml</id><title type="html">Ashby’s Hideout</title><subtitle>I sometimes convert coffee into Ruby code. Rubber ducks are awesome.</subtitle><entry><title type="html">Welcome to Jekyll!</title><link href="https://joshisa.ninja/2019/10/07/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2019-10-07T22:40:57+00:00</published><updated>2019-10-07T22:40:57+00:00</updated><id>https://joshisa.ninja/2019/10/07/welcome-to-jekyll</id><content type="html" xml:base="https://joshisa.ninja/2019/10/07/welcome-to-jekyll.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;Jekyll requires blog post files to be named according to the following format:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YEAR-MONTH-DAY-title.MARKUP&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Where &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YEAR&lt;/code&gt; is a four-digit number, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MONTH&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DAY&lt;/code&gt; are both two-digit numbers, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MARKUP&lt;/code&gt; is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;one&lt;/li&gt;
+  &lt;li&gt;two&lt;/li&gt;
+  &lt;li&gt;three&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;thing&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;
+   &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;to_s&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;h1&quot;&gt;H1&lt;/h1&gt;
+&lt;h2 id=&quot;h2&quot;&gt;H2&lt;/h2&gt;
+&lt;h3 id=&quot;h3&quot;&gt;H3&lt;/h3&gt;
+&lt;h4 id=&quot;h4&quot;&gt;H4&lt;/h4&gt;
+&lt;h5 id=&quot;h5&quot;&gt;H5&lt;/h5&gt;
+&lt;h6 id=&quot;h6&quot;&gt;H6&lt;/h6&gt;
+
+&lt;p&gt;&lt;em&gt;itallics&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;boooooold&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;someonce said something smart enough for this tag&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;numbers&lt;/li&gt;
+  &lt;li&gt;fish&lt;/li&gt;
+  &lt;li&gt;red&lt;/li&gt;
+  &lt;li&gt;blue&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/avatar.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;div class=&quot;source-location&quot;&gt;
+          &lt;a href=&quot;https://github.com/seattlerb/minitest/blob/1f2b1328f286967926a381d7a34e0eadead0722d/lib/minitest.rb#L52-L66&quot;&gt;
+            lib/minitest.rb#L52-L66 &amp;nearr;
+          &lt;/a&gt;
+        &lt;/div&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;div class=&quot;emphasized&quot;&gt;&lt;span class=&quot;hll&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;autorun&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&quot;hll&quot;&gt;  &lt;span class=&quot;nb&quot;&gt;at_exit&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&quot;hll&quot;&gt;    &lt;span class=&quot;k&quot;&gt;next&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;vg&quot;&gt;$!&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;vg&quot;&gt;$!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;kind_of?&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;SystemExit&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;vg&quot;&gt;$!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;success?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&quot;hll&quot;&gt;
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;exit_code&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;
+
+    &lt;span class=&quot;nb&quot;&gt;at_exit&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;vc&quot;&gt;@@after_run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;reverse_each&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:call&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;nb&quot;&gt;exit&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;exit_code&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;exit_code&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Minitest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ARGV&lt;/span&gt;
+&lt;span class=&quot;hll&quot;&gt;  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;unless&lt;/span&gt; &lt;span class=&quot;vc&quot;&gt;@@installed_at_exit&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&quot;hll&quot;&gt;  &lt;span class=&quot;vc&quot;&gt;@@installed_at_exit&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&quot;hll&quot;&gt;&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-haml&quot; data-lang=&quot;haml&quot;&gt;&lt;div class=&quot;emphasized&quot;&gt;&lt;span class=&quot;hll&quot;&gt;&lt;span class=&quot;nt&quot;&gt;%button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-behavior=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;open-dialog&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-dialog-id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;bulk-delete&quot;&lt;/span&gt; )
+&lt;/span&gt;  Bulk Delete
+
+&lt;span class=&quot;hll&quot;&gt;&lt;span class=&quot;nt&quot;&gt;%dialog&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;#bulk-delete&lt;/span&gt;
+&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;%header&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;-# Dialog title and a close button could be here&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;%section&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;.dialog-main&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;-# A table of records or some confirmation message might live here&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;%footer&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Some actions as buttons or links could be here&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-haml&quot; data-lang=&quot;haml&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nt&quot;&gt;%button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-behavior=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;open-dialog&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-dialog-id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;bulk-delete&quot;&lt;/span&gt; )
+  Bulk Delete
+
+&lt;span class=&quot;nt&quot;&gt;%dialog&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;#bulk-delete&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;%header&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;-# Dialog title and a close button could be here
+&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;%section&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;.dialog-main&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;-# A table of records or some confirmation message might live here
+&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;%footer&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Some actions as buttons or links could be here&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name></name></author><category term="test," /><category term="home" /><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry></feed>
