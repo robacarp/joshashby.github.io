@@ -61,3 +61,52 @@ end
 4. blue
 
 ![](/avatar.jpg)
+
+
+{% source ruby location="https://github.com/seattlerb/minitest/blob/1f2b1328f286967926a381d7a34e0eadead0722d/lib/minitest.rb#L52-L66" 
+               hl_lines="1 2 3 4 13 14 15" %}
+def self.autorun
+  at_exit {
+    next if $! and not ($!.kind_of? SystemExit and $!.success?)
+
+    exit_code = nil
+
+    at_exit {
+      @@after_run.reverse_each(&:call)
+      exit exit_code || false
+    }
+
+    exit_code = Minitest.run ARGV
+  } unless @@installed_at_exit
+  @@installed_at_exit = true
+end
+{% endsource %}
+
+
+
+
+{% source haml hl_lines="1 4" %}
+%button( data-behavior="open-dialog", data-dialog-id="bulk-delete" )
+  Bulk Delete
+
+%dialog#bulk-delete
+  %header
+    -# Dialog title and a close button could be here
+  %section.dialog-main
+    -# A table of records or some confirmation message might live here
+  %footer
+    -# Some actions as buttons or links could be here
+{% endsource %}
+
+{% highlight haml linenos %}
+%button( data-behavior="open-dialog", data-dialog-id="bulk-delete" )
+  Bulk Delete
+
+%dialog#bulk-delete
+  %header
+    -# Dialog title and a close button could be here
+  %section.dialog-main
+    -# A table of records or some confirmation message might live here
+  %footer
+    -# Some actions as buttons or links could be here
+{% endhighlight %}

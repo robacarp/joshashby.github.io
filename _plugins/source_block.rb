@@ -1,4 +1,8 @@
 # frozen_string_literal: true
+#
+# Idea taken from Shime https://shime.sh/til/building-emphasized-code-blocks-in-jekyll
+# This is mostly a modified copy-pasta of the Jekyll Highlight liquid block
+# with the addition of a source link and line highlighting/emphasis
 
 # Adds support for source location links.
 module Jekyll
@@ -65,21 +69,13 @@ module Jekyll
         options
       end
 
-      def render_pygments(code, _context)
-        Jekyll.logger.warn "Warning:", "Highlight Tag no longer supports rendering with Pygments."
-        Jekyll.logger.warn "", "Using the default highlighter, Rouge, instead."
-        render_rouge(code)
-      end
-
       def render_rouge(code)
-        require "rouge"
-        formatter = ::Rouge::Formatters::HTMLLegacy.new(
-          :line_numbers => @highlight_options[:linenos],
-          :wrap         => false,
-          :css_class    => "highlight",
-          :gutter_class => "gutter",
-          :code_class   => "code"
+        formatter = ::Rouge::Formatters::HTMLLineHighlighter.new(
+          ::Rouge::Formatters::HTML.new,
+          highlight_lines: @highlight_options[:hl_lines].map(&:to_i),
+          highlight_line_class: "hll"
         )
+
         lexer = ::Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
         formatter.format(lexer.lex(code))
       end
@@ -94,8 +90,8 @@ module Jekyll
           "data-lang=\"#{@lang}\""
         ].join(' ')
 
-        "<figure class=\"highlight\"><pre><code #{code_attributes}>"\
-        "#{code.chomp}</code></pre>#{add_figcaption_tag}</figure>"
+        "<figure class=\"highlight\">#{add_location_tag}<pre><code #{code_attributes}>"\
+        "<div class=\"emphasized\">#{code.chomp}</div></code></pre>#{add_figcaption_tag}</figure>"
       end
 
       def add_figcaption_tag
@@ -105,8 +101,20 @@ module Jekyll
 
         "<figcaption>#{caption}</figcaption>"
       end
+
+      def add_location_tag
+        location = @highlight_options[:location]&.first
+
+        return "" unless location
+
+        "<div class='source-location'>
+          <a href='#{location}'>
+            #{location.split(%r{/blob/.*?/}).last} &nearr;
+          </a>
+        </div>"
+      end
     end
   end
 end
 
-Liquid::Template.register_tag("source", Jekyll::Tags::SourceBlock)
+Liquid::Template.register_tag('source', Jekyll::Tags::SourceBlock)

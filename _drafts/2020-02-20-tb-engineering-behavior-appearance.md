@@ -1,5 +1,5 @@
 ---
-title: 'tb Engineering: Behavior & Appearance'
+title: 'transientBug Engineering: Client Behaviors'
 layout: post
 ---
 
