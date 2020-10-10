@@ -77,3 +77,4 @@ exclude:
   - tailwind.config.js
   - purgecss.config.js
   - postcss.config.js
+  - devops/
