@@ -22,7 +22,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-10-07T22:40:57+00:00" />
 <script type="application/ld+json">
-{"description":"You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.","@type":"BlogPosting","headline":"Welcome to Jekyll!","url":"https://joshisa.ninja/2019/10/07/welcome-to-jekyll.html","dateModified":"2019-10-07T22:40:57+00:00","datePublished":"2019-10-07T22:40:57+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://joshisa.ninja/2019/10/07/welcome-to-jekyll.html"},"@context":"https://schema.org"}</script>
+{"description":"You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.","@type":"BlogPosting","headline":"Welcome to Jekyll!","dateModified":"2019-10-07T22:40:57+00:00","datePublished":"2019-10-07T22:40:57+00:00","url":"https://joshisa.ninja/2019/10/07/welcome-to-jekyll.html","mainEntityOfPage":{"@type":"WebPage","@id":"https://joshisa.ninja/2019/10/07/welcome-to-jekyll.html"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -38,9 +38,9 @@
 
     <div id="nav-links" class="expandable">
       <ul class="nav-list">
-        <li class="nav-item"><a href="/about/">About</a></li>
-        <li class="nav-item"><a href="/photos/">Photos</a></li>
         <li class="nav-item"><a href="/posts/">Posts</a></li>
+        <li class="nav-item"><a href="/photos/">Photos</a></li>
+        <li class="nav-item"><a href="/about/">About</a></li>
         <li class="nav-item"><a href="/resume/">Resume</a></li>
 
         
@@ -72,19 +72,19 @@ document.querySelectorAll("[data-behavior~=toggle-hidden]").forEach(elem => {
 </script>
 
 
-  <header id="page-header">
-    <div class="flex flex-col">
-      <h1>Welcome to Jekyll!</h1>
-      <div>
-        <div class="mt-2 flex items-center text-sm leading-5 text-gray-500 sm:mr-6 font-sans">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-          <time datetime="2019-10-07">2019-Oct-07</time>
+  <main>
+    <header id="page-header">
+      <div class="flex flex-col">
+        <h1>Welcome to Jekyll!</h1>
+        <div>
+          <div class="mt-2 flex items-center text-sm leading-5 text-gray-500 sm:mr-6 font-sans">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            <time datetime="2019-10-07">2019-Oct-07</time>
+          </div>
         </div>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <main>
     <article class="post">
       <p>You’ll find this post in your <code class="language-plaintext highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="language-plaintext highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
 
@@ -139,11 +139,7 @@ document.querySelectorAll("[data-behavior~=toggle-hidden]").forEach(elem => {
 
 <p><img src="/avatar.jpg" alt="" /></p>
 
-<figure class="highlight"><div class="source-location">
-          <a href="https://github.com/seattlerb/minitest/blob/1f2b1328f286967926a381d7a34e0eadead0722d/lib/minitest.rb#L52-L66">
-            lib/minitest.rb#L52-L66 &nearr;
-          </a>
-        </div><pre><code class="language-ruby" data-lang="ruby"><div class="emphasized"><span class="hll"><span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">autorun</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><div class="emphasized"><span class="hll"><span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">autorun</span>
 </span><span class="hll">  <span class="nb">at_exit</span> <span class="p">{</span>
 </span><span class="hll">    <span class="k">next</span> <span class="k">if</span> <span class="vg">$!</span> <span class="n">and</span> <span class="n">not</span> <span class="p">(</span><span class="vg">$!</span><span class="p">.</span><span class="nf">kind_of?</span> <span class="no">SystemExit</span> <span class="n">and</span> <span class="vg">$!</span><span class="p">.</span><span class="nf">success?</span><span class="p">)</span>
 </span><span class="hll">
@@ -160,7 +156,11 @@ document.querySelectorAll("[data-behavior~=toggle-hidden]").forEach(elem => {
 </span><span class="hll"><span class="k">end</span>
 </span></div></code></pre></figure>
 
-<figure class="highlight"><pre><code class="language-haml" data-lang="haml"><div class="emphasized"><span class="hll"><span class="nt">%button</span><span class="p">(</span> <span class="na">data-behavior=</span><span class="s">"open-dialog"</span><span class="err">,</span> <span class="na">data-dialog-id=</span><span class="s">"bulk-delete"</span> )
+<figure class="highlight"><div class="source-location">
+          <a href="https://github.com/seattlerb/minitest/blob/1f2b1328f286967926a381d7a34e0eadead0722d/lib/minitest.rb#L52-L66">
+            lib/minitest.rb#L52-L66 &nearr;
+          </a>
+        </div><pre><code class="language-haml" data-lang="haml"><div class="emphasized"><span class="hll"><span class="nt">%button</span><span class="p">(</span> <span class="na">data-behavior=</span><span class="s">"open-dialog"</span><span class="err">,</span> <span class="na">data-dialog-id=</span><span class="s">"bulk-delete"</span> )
 </span>  Bulk Delete
 
 <span class="hll"><span class="nt">%dialog</span><span class="nf">#bulk-delete</span>
@@ -169,29 +169,7 @@ document.querySelectorAll("[data-behavior~=toggle-hidden]").forEach(elem => {
   <span class="nt">%section</span><span class="nc">.dialog-main</span>
     <span class="c">-# A table of records or some confirmation message might live here</span>
   <span class="nt">%footer</span>
-    <span class="p">-</span><span class="c1"># Some actions as buttons or links could be here</span></div></code></pre></figure>
-
-<figure class="highlight"><pre><code class="language-haml" data-lang="haml"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td><td class="code"><pre><span class="nt">%button</span><span class="p">(</span> <span class="na">data-behavior=</span><span class="s">"open-dialog"</span><span class="err">,</span> <span class="na">data-dialog-id=</span><span class="s">"bulk-delete"</span> )
-  Bulk Delete
-
-<span class="nt">%dialog</span><span class="nf">#bulk-delete</span>
-  <span class="nt">%header</span>
-    <span class="c">-# Dialog title and a close button could be here
-</span>  <span class="nt">%section</span><span class="nc">.dialog-main</span>
-    <span class="c">-# A table of records or some confirmation message might live here
-</span>  <span class="nt">%footer</span>
-    <span class="p">-</span><span class="c1"># Some actions as buttons or links could be here</span>
-</pre></td></tr></tbody></table></code></pre></figure>
+    <span class="p">-</span><span class="c1"># Some actions as buttons or links could be here</span></div></code></pre><figcaption>testing one, two, three</figcaption></figure>
 
 
     </article>

@@ -1,3 +1,12 @@
+/**
+ * TODOS
+ *  - Nav Menu items have a weird and not ideal click area
+ *  - Do i want a larger XL size that puts the sidebar to the right as a full
+ *    height thing?
+ *  -
+ *
+ **/
+
 .expandable {
   --bg-opacity: 1;
   background-color: #2d3748;
@@ -21,9 +30,9 @@
   .expandable {
     position: relative;
     margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
     padding: 0;
     top: initial;
+    max-height: initial;
   }
 }
 
@@ -162,6 +171,12 @@ ul.nav-list .list-divider {
   justify-content: space-around;
 }
 
+@media (min-width: 1024px) {
+  .hamburger-bun {
+    display: none;
+  }
+}
+
 /*@screen xl {*/
 
 /*.hamburger-bun {*/
@@ -176,7 +191,6 @@ body {
   display: grid;
   grid:
     "sidebar" auto
-    "header " auto
     "content" auto
     / 100%;
 }
@@ -187,7 +201,7 @@ body {
     margin-right: auto;
     max-width: 1000px;
     grid:
-      "header sidebar" 8rem
+      "content sidebar" 8rem
       "content aside" auto
       / calc(100% - 16rem) 16rem;
   }
@@ -266,7 +280,7 @@ main {
 /*}*/
 
 #page-header {
-  grid-area: header;
+  /*grid-area: content;*/
   display: flex;
   flex-direction: column;
   border-bottom-width: 2px;
@@ -276,8 +290,6 @@ main {
   margin-bottom: 1rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
 }
 
 #page-header h1 {
@@ -295,8 +307,6 @@ main {
     align-items: baseline;
     margin-left: 0;
     margin-right: 0;
-    padding-left: 0;
-    padding-right: 0;
   }
 }
 

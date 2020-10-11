@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://joshisa.ninja/feed.xml" rel="self" type="application/atom+xml" /><link href="https://joshisa.ninja/" rel="alternate" type="text/html" /><updated>2020-10-10T19:05:51+00:00</updated><id>https://joshisa.ninja/feed.xml</id><title type="html">Ashby’s Hideout</title><subtitle>I sometimes convert coffee into Ruby code. Rubber ducks are awesome.</subtitle><entry><title type="html">Welcome to Jekyll!</title><link href="https://joshisa.ninja/2019/10/07/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2019-10-07T22:40:57+00:00</published><updated>2019-10-07T22:40:57+00:00</updated><id>https://joshisa.ninja/2019/10/07/welcome-to-jekyll</id><content type="html" xml:base="https://joshisa.ninja/2019/10/07/welcome-to-jekyll.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://joshisa.ninja/feed.xml" rel="self" type="application/atom+xml" /><link href="https://joshisa.ninja/" rel="alternate" type="text/html" /><updated>2020-10-11T00:06:53+00:00</updated><id>https://joshisa.ninja/feed.xml</id><title type="html">Ashby’s Hideout</title><subtitle>I sometimes convert coffee into Ruby code. Rubber ducks are awesome.</subtitle><entry><title type="html">Welcome to Jekyll!</title><link href="https://joshisa.ninja/2019/10/07/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2019-10-07T22:40:57+00:00</published><updated>2019-10-07T22:40:57+00:00</updated><id>https://joshisa.ninja/2019/10/07/welcome-to-jekyll</id><content type="html" xml:base="https://joshisa.ninja/2019/10/07/welcome-to-jekyll.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
 
 &lt;p&gt;Jekyll requires blog post files to be named according to the following format:&lt;/p&gt;
 
@@ -51,11 +51,7 @@
 
 &lt;p&gt;&lt;img src=&quot;/avatar.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;div class=&quot;source-location&quot;&gt;
-          &lt;a href=&quot;https://github.com/seattlerb/minitest/blob/1f2b1328f286967926a381d7a34e0eadead0722d/lib/minitest.rb#L52-L66&quot;&gt;
-            lib/minitest.rb#L52-L66 &amp;nearr;
-          &lt;/a&gt;
-        &lt;/div&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;div class=&quot;emphasized&quot;&gt;&lt;span class=&quot;hll&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;autorun&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;div class=&quot;emphasized&quot;&gt;&lt;span class=&quot;hll&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;autorun&lt;/span&gt;
 &lt;/span&gt;&lt;span class=&quot;hll&quot;&gt;  &lt;span class=&quot;nb&quot;&gt;at_exit&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;span class=&quot;hll&quot;&gt;    &lt;span class=&quot;k&quot;&gt;next&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;vg&quot;&gt;$!&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;vg&quot;&gt;$!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;kind_of?&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;SystemExit&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;vg&quot;&gt;$!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;success?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;span class=&quot;hll&quot;&gt;
@@ -72,7 +68,11 @@
 &lt;/span&gt;&lt;span class=&quot;hll&quot;&gt;&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-haml&quot; data-lang=&quot;haml&quot;&gt;&lt;div class=&quot;emphasized&quot;&gt;&lt;span class=&quot;hll&quot;&gt;&lt;span class=&quot;nt&quot;&gt;%button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-behavior=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;open-dialog&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-dialog-id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;bulk-delete&quot;&lt;/span&gt; )
+&lt;figure class=&quot;highlight&quot;&gt;&lt;div class=&quot;source-location&quot;&gt;
+          &lt;a href=&quot;https://github.com/seattlerb/minitest/blob/1f2b1328f286967926a381d7a34e0eadead0722d/lib/minitest.rb#L52-L66&quot;&gt;
+            lib/minitest.rb#L52-L66 &amp;nearr;
+          &lt;/a&gt;
+        &lt;/div&gt;&lt;pre&gt;&lt;code class=&quot;language-haml&quot; data-lang=&quot;haml&quot;&gt;&lt;div class=&quot;emphasized&quot;&gt;&lt;span class=&quot;hll&quot;&gt;&lt;span class=&quot;nt&quot;&gt;%button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-behavior=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;open-dialog&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-dialog-id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;bulk-delete&quot;&lt;/span&gt; )
 &lt;/span&gt;  Bulk Delete
 
 &lt;span class=&quot;hll&quot;&gt;&lt;span class=&quot;nt&quot;&gt;%dialog&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;#bulk-delete&lt;/span&gt;
@@ -81,26 +81,4 @@
   &lt;span class=&quot;nt&quot;&gt;%section&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;.dialog-main&lt;/span&gt;
     &lt;span class=&quot;c&quot;&gt;-# A table of records or some confirmation message might live here&lt;/span&gt;
   &lt;span class=&quot;nt&quot;&gt;%footer&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Some actions as buttons or links could be here&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-haml&quot; data-lang=&quot;haml&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nt&quot;&gt;%button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-behavior=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;open-dialog&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-dialog-id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;bulk-delete&quot;&lt;/span&gt; )
-  Bulk Delete
-
-&lt;span class=&quot;nt&quot;&gt;%dialog&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;#bulk-delete&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;%header&lt;/span&gt;
-    &lt;span class=&quot;c&quot;&gt;-# Dialog title and a close button could be here
-&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;%section&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;.dialog-main&lt;/span&gt;
-    &lt;span class=&quot;c&quot;&gt;-# A table of records or some confirmation message might live here
-&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;%footer&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Some actions as buttons or links could be here&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name></name></author><category term="test," /><category term="home" /><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry></feed>
+    &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Some actions as buttons or links could be here&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;figcaption&gt;testing one, two, three&lt;/figcaption&gt;&lt;/figure&gt;</content><author><name></name></author><category term="test," /><category term="home" /><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry></feed>
