@@ -1,2 +1,3 @@
 nodejs 12.8.0
 pulumi 2.2.1
+doctl 1.48.0

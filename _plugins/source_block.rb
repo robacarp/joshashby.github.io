@@ -95,11 +95,11 @@ module Jekyll
       end
 
       def add_figcaption_tag
-        caption = @highlight_options[:caption]&.first
+        caption = @highlight_options[:caption]
 
         return "" unless caption
 
-        "<figcaption>#{caption}</figcaption>"
+        "<figcaption>#{caption.join " "}</figcaption>"
       end
 
       def add_location_tag
