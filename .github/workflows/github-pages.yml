@@ -62,7 +62,9 @@ jobs:
 
       - name: Jekyll Build
         working-directory: source
-        run: JEKYLL_ENV=production bundle exec jekyll build -d ../build
+        env:
+          JEKYLL_ENV: production
+        run: bundle exec jekyll build -d ../build
 
       - name: Commit and push changes to master
         working-directory: build
