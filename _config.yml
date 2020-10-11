@@ -52,7 +52,7 @@ jekyll-archives:
     day: "/:year/:month/:day/"
 
 picture:
-  output: generated
+  output: "assets/images/generated"
 
 # Exclude from processing.
 # The following items will not be processed, by default.

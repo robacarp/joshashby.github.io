@@ -9,7 +9,7 @@
         <li class="nav-item"><a href="/about/">About</a></li>
         <li class="nav-item"><a href="/resume/">Resume</a></li>
 
-        {% if ENV["JEKYLL_ENV"] != "production" %}
+        {% if jekyll.environment == "development" %}
         <li class="list-divider"></li>
         <li class="nav-item"><a href="/admin/">Admin Home</a></li>
         {% endif %}
