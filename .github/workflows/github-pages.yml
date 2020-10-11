@@ -57,7 +57,7 @@ jobs:
         working-directory: source
         run: |
           sudo apt update
-          sudo apt install imagemagick
+          sudo apt install imagemagick webp
           convert --version
 
       - name: Jekyll Build
