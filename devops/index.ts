@@ -52,7 +52,7 @@ const ns1Record = new digitalocean.DnsRecord("ns1.@", {
   type: "NS",
   value: "ns1.digitalocean.com.",
   ttl: 1800
-}, { import: "joshisa.ninja,56550425" });
+});
 
 const ns2Record = new digitalocean.DnsRecord("ns2.@", {
   name: "@",
@@ -60,7 +60,7 @@ const ns2Record = new digitalocean.DnsRecord("ns2.@", {
   type: "NS",
   value: "ns2.digitalocean.com.",
   ttl: 1800
-}, { import: "joshisa.ninja,56550426" });
+});
 
 const ns3Record = new digitalocean.DnsRecord("ns3.@", {
   name: "@",
@@ -68,7 +68,28 @@ const ns3Record = new digitalocean.DnsRecord("ns3.@", {
   type: "NS",
   value: "ns3.digitalocean.com.",
   ttl: 1800
-}, { import: "joshisa.ninja,56550427" });
+});
+
+// Create a new Spaces Bucket
+const photosBucket = new digitalocean.SpacesBucket("joshisa-ninja-photographs", {
+  region: "nyc3",
+  acl: "public-read",
+});
+
+// Create a DigitalOcean managed Let's Encrypt Certificate
+const photosCDNCert = new digitalocean.Certificate("photographs-cdn-photosCDNCert", {
+  type: "lets_encrypt",
+  domains: ["photos.joshisa.ninja"],
+});
+
+// Add a CDN endpoint with a custom sub-domain to the Spaces Bucket
+const photosCDN = new digitalocean.Cdn("photographs-cdn", {
+  origin: photosBucket.bucketDomainName,
+  customDomain: "photos.joshisa.ninja",
+  certificateId: photosCDNCert.id,
+});
 
 // Export the name of the domain
 export const domainName = domain.name;
+export const photoBucketDomain = photosBucket.bucketDomainName;
+export const photoBucketCDNDomain = photosCDN.endpoint;
