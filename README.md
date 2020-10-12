@@ -24,7 +24,7 @@ jekyll-admin provides a nice web based authoring interface for new content.
 
 The workflow for the photography page is still a work in progress and I try to
 figure out the best way to make it scale with my somewhat iPad/mobile based
-workflow. It's modeled after [Brandur's setup]() but with some changes such as
+workflow. It's modeled after [Brandur's setup](https://github.com/brandur/sorg/blob/cbd52b385f8962be49ee52e8d15a05efb1c7783a/docs/photographs.md) but with some changes such as
 not being backed by dropbox.
 
 Photos are all stripped of EXIF, recompressed using some imagemagick parameters
