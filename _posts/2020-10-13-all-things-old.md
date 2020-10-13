@@ -12,7 +12,7 @@ During the ongoing COVID-19 pandemic, I've had a lot of time to think, dangerous
 
  - A walkthrough of the setup for this site and how I'm using Jekyll, Github Actions, and Github Pages to build and host it in a no-frills way
  - A walkthrough of how I set up a personal server with Traefik and Docker for painless but flexible deploys of modest personal tools
- - A dive into building out some new frontend UI for my personal bookmarking site [transientBug](transientbug.ninja)
+ - A dive into building out some new frontend UI for my personal bookmarking site [transientBug](https://transientbug.ninja)
 
 Additionally, I've always felt uneasy about feeding into the walled gardens of platforms for creative outlets such as photography. Historically, I haven't had a good place to publish and no workflow that has felt right, so  I spent time thinking about that process and reading up on how others have set up theirs. I think I've got a starting point that should enable me to share some more of my work with the world. We'll see.
 
