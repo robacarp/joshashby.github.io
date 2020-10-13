@@ -1,5 +1,9 @@
 ---
 title: All Things Old
+layout: post
+New field 2: All Things Old
+date: '2020-10-13 14:30:00'
+tags: []
 ---
 
 At this rate, I should get an award for time wasted recreating this site in various failed attempts at finding a setup that sits well with me. At one point in time, it was a static site hosted on some random but free service and built with WYSIWYG tools like KompoZer, NVU, and Bluefish and making liberal use of image maps and amazing Web 2.0 graphics. Then it was a WordPress site. Then a static site, then another WordPress site, somewhere there was a Tumblr version ... You get the picture. Many of these evolutions came stemmed from being unhappy or incapable of maintaining the site's state due to time, neglect, or merely a lack of knowledge. It should also be noted that this all happened in the timespan of not months but years, nearly 15. However, during all of the iterations, I've grown both in working knowledge around running servers and hosting websites and personal experience around what works for me and what I want out of a personal site.  And thus we arrive at today and yet another incarnation of this site.
