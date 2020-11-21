@@ -9,7 +9,7 @@ Cameras:
  - Canon 70D
 
 Lenses:
- - Canon nifty-fifty 50mm F1/4 fixed prime
+ - Canon "nifty-fifty" 50mm F1/4 fixed prime
  - Various Canon kit lenses
  - Sigma DG 70-300mm F4-5.6
 
@@ -19,5 +19,6 @@ Flash:
   - Yongnuo YN685 with a Godox Propac PB960 4500mAh Battery Pack
   - 2x Neewer 500W Studio Strobes
 
-I've got a Minolta SR-T 101 and some Kodak 200/400 Gold film laying around, but
-haven't had much of a chance to shoot and develop anything good.
+I've also got a Minolta SR-T 101 and some Kodak 200/400 Gold film laying around,
+but haven't had much of a chance to shoot and develop anything good with it. Maybe
+one day.
