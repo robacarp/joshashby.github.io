@@ -1,5 +1,5 @@
-#cdn: "https://photos.joshisa.ninja"
-cdn: "/photos"
+cdn: "https://photos.joshisa.ninja"
+#cdn: "/photos"
 photographs:
   - title: "Chief Snoozing on the Couch"
     description: ""
