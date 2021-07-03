@@ -1,0 +1,13 @@
+#!/bin/bash
+set -Eeuo pipefail
+
+export DO_SPACES_ENDPOINT="https://nyc3.digitaloceanspaces.com"
+export DO_PROCESSED_SPACE_NAME="joshisa-ninja-photographs-ccdda0f"
+export DO_RAW_SPACE_NAME="joshisa-ninja-raw-photographs-ccdda0f"
+
+existing_files=$(aws s3 ls "s3://${DO_PROCESSED_SPACE_NAME}/" --recursive --endpoint ${DO_SPACES_ENDPOINT}  | awk -F" " '{print $4}'  | sed 's/-[0-9]*\..*$//' | uniq)
+raw_files=$(aws s3 ls "s3://${DO_RAW_SPACE_NAME}/" --recursive --endpoint ${DO_SPACES_ENDPOINT}  | awk -F" " '{print $4}'  | sed 's/-[0-9]*\..*$//' | uniq)
+
+new_raws=$(echo ${existing_files[@]} ${existing_files[@]} ${raw_files[@]} | tr ' ' '\n' | sort | uniq -u)
+
+echo $new_raws

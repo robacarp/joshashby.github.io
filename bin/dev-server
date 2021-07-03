@@ -1,3 +1,4 @@
 #!/bin/sh
+set -Eeuo pipefail
 
 exec bundle exec jekyll serve --livereload --drafts --future "$@"

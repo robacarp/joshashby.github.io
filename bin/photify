@@ -1,8 +1,28 @@
 #!/bin/bash
+set -Eeuo pipefail
 Sizes=("400" "600" "800" "1000" "2000")
 
-for size in ${Sizes[*]}; do
-  echo "Making _photos/$@-${size}.jpg"
+path=$@
+base_filename=$(basename $@)
+filename_prefix=${base_filename%.*}
 
-  convert -strip -interlace Plane -gaussian-blur 0.05 -quality 85% -auto-orient -resize ${size} "_raw_photos/$@.jpg" "photos/$@-${size}.jpg"
+for size in ${Sizes[*]}; do
+  processed_file="photos/${filename_prefix}-${size}.jpg"
+
+  echo "Converting ${path} -> ${processed_file}"
+
+  old_size=$(du -h ${path} | awk -F" " '{print $1}')
+
+  convert -strip \
+    -interlace Plane \
+    -gaussian-blur 0.05 \
+    -quality 85% \
+    -auto-orient \
+    -resize ${size} \
+    ${path} ${processed_file}
+
+
+  new_size=$(du -h ${processed_file} | awk -F" " '{print $1}')
+
+  echo "    ${old_size} --> ${new_size}"
 done

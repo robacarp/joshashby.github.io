@@ -1,5 +1,5 @@
 #!/bin/bash
-set -Eeuxov pipefail
+set -Eeuo pipefail
 
 export DO_SPACES_ENDPOINT="https://nyc3.digitaloceanspaces.com"
 export DO_SPACE_NAME="joshisa-ninja-photographs-ccdda0f"
