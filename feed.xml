@@ -1,4 +1,130 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://joshisa.ninja/feed.xml" rel="self" type="application/atom+xml" /><link href="https://joshisa.ninja/" rel="alternate" type="text/html" /><updated>2021-05-26T03:38:30+00:00</updated><id>https://joshisa.ninja/feed.xml</id><title type="html">Ashby’s Hideout</title><subtitle>I sometimes convert coffee into Ruby code. Rubber ducks are awesome.</subtitle><entry><title type="html">All Things Old</title><link href="https://joshisa.ninja/2020/10/13/all-things-old.html" rel="alternate" type="text/html" title="All Things Old" /><published>2020-10-13T14:30:00+00:00</published><updated>2020-10-13T14:30:00+00:00</updated><id>https://joshisa.ninja/2020/10/13/all-things-old</id><content type="html" xml:base="https://joshisa.ninja/2020/10/13/all-things-old.html">&lt;p&gt;At this rate, I should get an award for time wasted recreating this site in various failed attempts at finding a setup that sits well with me. At one point in time, it was a static site hosted on some random but free service and built with WYSIWYG tools like KompoZer, NVU, and Bluefish and making liberal use of image maps and amazing Web 2.0 graphics. Then it was a WordPress site. Then a static site, then another WordPress site, somewhere there was a Tumblr version … You get the picture. Many of these evolutions came stemmed from being unhappy or incapable of maintaining the site’s state due to time, neglect, or merely a lack of knowledge. It should also be noted that this all happened in the timespan of not months but years, nearly 15. However, during all of the iterations, I’ve grown both in working knowledge around running servers and hosting websites and personal experience around what works for me and what I want out of a personal site.  And thus we arrive at today and yet another incarnation of this site.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://joshisa.ninja/feed.xml" rel="self" type="application/atom+xml" /><link href="https://joshisa.ninja/" rel="alternate" type="text/html" /><updated>2021-07-03T19:14:33+00:00</updated><id>https://joshisa.ninja/feed.xml</id><title type="html">Ashby’s Hideout</title><subtitle>I sometimes convert coffee into Ruby code. Rubber ducks are awesome.</subtitle><entry><title type="html">Using Github Actions to build a Jekyll 4 site and host it on Github Pages</title><link href="https://joshisa.ninja/2020/10/14/using-github-actions-to-build-a-jekyll-4-site-and-host-it-on-github-pages.html" rel="alternate" type="text/html" title="Using Github Actions to build a Jekyll 4 site and host it on Github Pages" /><published>2020-10-14T00:00:00+00:00</published><updated>2020-10-14T00:00:00+00:00</updated><id>https://joshisa.ninja/2020/10/14/using-github-actions-to-build-a-jekyll-4-site-and-host-it-on-github-pages</id><content type="html" xml:base="https://joshisa.ninja/2020/10/14/using-github-actions-to-build-a-jekyll-4-site-and-host-it-on-github-pages.html">&lt;p&gt;A while back I decided that I was going to move this site from an older &lt;a href=&quot;https://www.getlektor.com/&quot;&gt;Lektor&lt;/a&gt; setup to &lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; while retaining my Github Pages hosting setup. The reasons behind the move are little more than personal preference, but I had hoped to at least rid myself of Travis CI after being unhappy with Idera’s acquisition of it.&lt;/p&gt;
+
+&lt;p&gt;I initially planned on taking advantage of the automatic building and hosting of a &lt;a href=&quot;https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages/setting-up-a-github-pages-site-with-jekyll&quot;&gt;Jekyll site on Github Pages&lt;/a&gt;, however after seeing that I wouldn’t be able to have custom build steps such as using PostCSS for a custom theme and being locked into &lt;a href=&quot;https://pages.github.com/versions/&quot;&gt;Jekyll 3&lt;/a&gt;, I had to find my own way for building and deploying the site. Thankfully that’s an easy task now as a result of Github Actions which let me both ditch Travis CI and not have to worry about getting another CI runner authorized to push to the repo.&lt;/p&gt;
+
+&lt;p&gt;A lot of my setup follows the footsteps of &lt;a href=&quot;https://davidstosik.github.io/2020/05/31/static-blog-jekyll-410-github-pages-actions.html&quot;&gt;David Stosik’s setup&lt;/a&gt;, so be sure to give that a read. Additionally, I’m actively modeling my photography page setup after &lt;a href=&quot;https://brandur.org/photos&quot;&gt;Brandur’s&lt;/a&gt; setup and his documentation around how his &lt;a href=&quot;https://github.com/brandur/sorg/blob/81eb0a6bdfa891156c7124984306488093cdc6f7/docs/photographs.md&quot;&gt;site handles them&lt;/a&gt;. I’ll have a follow up post on how the photography side of things works once I get it settled.&lt;/p&gt;
+
+&lt;h3 id=&quot;github-actions&quot;&gt;Github Actions&lt;/h3&gt;
+
+&lt;p&gt;If you would like to follow along while reading through my own workflow configuration, you can find it &lt;a href=&quot;https://github.com/JoshAshby/joshashby.github.io/blob/source/.github/workflows/github-pages.yml&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;One of the great things about Github Actions over third-party CI providers is the deep integration with the repository: you can clone, commit and push all out of the box without many issues. This, combined with the reusable and composable actions make it quick and easy to build up powerful workflows.&lt;/p&gt;
+
+&lt;p&gt;I should note that these days there are two actions that could be used to simplify some of this:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/limjh16/jekyll-action-ts&quot;&gt;jekyll-action-ts&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/peaceiris/actions-gh-pages&quot;&gt;actions-gh-pages&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These actions were not around when I started this, and I’m choosing not the migrate over because the setup is simple and I don’t feel that these actions add any value to my setup.&lt;/p&gt;
+
+&lt;p&gt;Before we get too far, a small note of how we’ll set things up today: There will be two branches in git, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;master&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;source&lt;/code&gt;. The root &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/&lt;/code&gt; directory in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;master&lt;/code&gt; branch is where the built Github Pages will be served from, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;source&lt;/code&gt; stores the Jekyll setup. While we could have the pages served from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_site/&lt;/code&gt; in my &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;source&lt;/code&gt; branch, this means that every build will commit to my working branch, leading to some pains with uncesscessary commits on the working branch.&lt;/p&gt;
+
+&lt;p&gt;For some different configuration options, take a look at &lt;a href=&quot;https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site&quot;&gt;these docs&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Thi decision to have two branches means that we’ll need to:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Pull from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;source&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Build Jekyll&lt;/li&gt;
+  &lt;li&gt;Commit and Push the built &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_site/&lt;/code&gt;directory to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;master&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;branches&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;source&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The first thing we want to do is to limit the workflow to only run when I push to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;source&lt;/code&gt; branch, so that we don’t get our CI into a loop. With Github Actions we do this with the &lt;a href=&quot;https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#onpushpull_requestbranchestags&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;on.push.branches&lt;/code&gt;&lt;/a&gt; setting:&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;github-pages&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ubuntu-latest&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Next, I personally want to run this on a familiar environment, so we’ll use the built in Github Actions &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ubuntu&lt;/code&gt; runner, by setting the &lt;a href=&quot;https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jobs.&amp;lt;job-id&amp;gt;.runs-on&lt;/code&gt;&lt;/a&gt; setting (more info on the available runners &lt;a href=&quot;https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The rest of our work will be in the &lt;a href=&quot;https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idsteps&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jobs.&amp;lt;job-id&amp;gt;.steps&lt;/code&gt;&lt;/a&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@v2&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;				  &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ref&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;source&lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;source&lt;/span&gt;
+
+      &lt;span class=&quot;s&quot;&gt;- uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@v2&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;ref&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;master&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;build&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;These two actions are how we’ll pull from one branch and push to another, doing two checkouts of the repository at different paths for each branch: The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;source&lt;/code&gt; branch that’ll we’ll use to build the Jekyll site lives at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;./source&lt;/code&gt; and the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;master&lt;/code&gt; branch at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;./build&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/setup-ruby@v1&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;ruby-version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;2.7'&lt;/span&gt;
+
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/setup-node@v1&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;node-version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;16.4.x'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We’ll need ruby, and my own setup needs node so lets get those installed.&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/cache@v2&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;source/vendor/bundle&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$-gems-$&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;restore-keys&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;$-gems-&lt;/span&gt;
+
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/cache@v2&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;source/node_modules&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$-npm-$&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;restore-keys&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;$-npm-&lt;/span&gt;
+
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Bundle install&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;working-directory&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;source&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;gem install bundler --no-document&lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;bundle config path vendor/bundle&lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;bundle install --jobs 4 --retry 3&lt;/span&gt;
+
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Yarn install&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;working-directory&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;source&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;yarn install&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And now we’ll install the dependences in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;./source&lt;/code&gt;. We’ll use the cache actions to ensure that our dependencies are quick to install leading to faster publishing, and use the hash of the lockfiles to determine which cache to restore.&lt;/p&gt;
+
+&lt;p&gt;Now we get to the heart of the workflow, building and publishing the site:&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Jekyll Build&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;working-directory&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;source&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;JEKYLL_ENV&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;production&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;bundle exec jekyll build -d ../build&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Instead of building to Jekylls default &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_site&lt;/code&gt;, we’ll have it build to our checked out &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;master&lt;/code&gt; branch, at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;../build&lt;/code&gt; from inside of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;./source&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;And finally we’ll publish the site by making a new commit to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;master&lt;/code&gt; and push it to the repository with a helpful commit message linking the build back to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;source&lt;/code&gt; commit that triggered it, and set the commiter to show up as your own user on Github:&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Commit and push changes to master&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;working-directory&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;build&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;git config user.name &quot;${GITHUB_ACTOR}&quot;&lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;git config user.email &quot;${GITHUB_ACTOR}@users.noreply.github.com&quot;&lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;git add .&lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;git commit -m &quot;Update GitHub pages from Jekyll build for commit ${GITHUB_SHA}&quot;&lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;git push origin master&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And that’s it! It might look like a lot all spaced out like this, but it’s a fairly simple setup that is still powerful and expandable as you add more features to your site such as photograph processing, javascript resource processing or html cleanup in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;./build&lt;/code&gt; before publishing.&lt;/p&gt;</content><author><name></name></author><summary type="html">A while back I decided that I was going to move this site from an older Lektor setup to Jekyll while retaining my Github Pages hosting setup. The reasons behind the move are little more than personal preference, but I had hoped to at least rid myself of Travis CI after being unhappy with Idera’s acquisition of it.</summary></entry><entry><title type="html">All Things Old</title><link href="https://joshisa.ninja/2020/10/13/all-things-old.html" rel="alternate" type="text/html" title="All Things Old" /><published>2020-10-13T14:30:00+00:00</published><updated>2020-10-13T14:30:00+00:00</updated><id>https://joshisa.ninja/2020/10/13/all-things-old</id><content type="html" xml:base="https://joshisa.ninja/2020/10/13/all-things-old.html">&lt;p&gt;At this rate, I should get an award for time wasted recreating this site in various failed attempts at finding a setup that sits well with me. At one point in time, it was a static site hosted on some random but free service and built with WYSIWYG tools like KompoZer, NVU, and Bluefish and making liberal use of image maps and amazing Web 2.0 graphics. Then it was a WordPress site. Then a static site, then another WordPress site, somewhere there was a Tumblr version … You get the picture. Many of these evolutions came stemmed from being unhappy or incapable of maintaining the site’s state due to time, neglect, or merely a lack of knowledge. It should also be noted that this all happened in the timespan of not months but years, nearly 15. However, during all of the iterations, I’ve grown both in working knowledge around running servers and hosting websites and personal experience around what works for me and what I want out of a personal site.  And thus we arrive at today and yet another incarnation of this site.&lt;/p&gt;
 
 &lt;p&gt;During the ongoing COVID-19 pandemic, I’ve had a lot of time to think, dangerous amounts sometimes, and I’ve decided to explore more technically focused writing in some capacity. Now, whether that’s through breakdowns of something I wrote or doing dives into some project internals to explain some of the moving parts, who knows (I certainly don’t yet). So, this iterations theme is “throw some mud and see what sticks.” Hopefully, I can find a region that I fit into and have enough self-accountability to do a post once a month. This approach ties in nicely with my natural desire to explore and learn: I often go on deep dives into projects and try out different languages and programming paradigms. There isn’t anything blocking me from just writing down those learnings and sharing them with the world through another set of eyes. To kick this off, I’m working on a few new posts that I’m going to hold myself accountable to get done by the end of this year:&lt;/p&gt;
 
