@@ -21,11 +21,11 @@ jobs:
 
       - uses: actions/setup-ruby@v1
         with:
-          ruby-version: '2.6'
+          ruby-version: '2.7'
 
       - uses: actions/setup-node@v1
         with:
-          node-version: '12.8.x'
+          node-version: '16.4.x'
 
       - uses: actions/cache@v2
         with:

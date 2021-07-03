@@ -1,13 +1,14 @@
-cdn: "https://photos.joshisa.ninja"
+#cdn: "https://photos.joshisa.ninja"
+cdn: "/photos"
 photographs:
   - title: "Chief Snoozing on the Couch"
     description: ""
     slug: "couch_chief"
-    
+
   - title: "Chief in the Kitchen"
     description: ""
     slug: "kitchen_chief"
-    
+
   - title: "Cabin Nighttime"
     description: ""
     slug: "cabin_stars"

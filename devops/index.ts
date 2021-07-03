@@ -70,10 +70,16 @@ const ns3Record = new digitalocean.DnsRecord("ns3.@", {
   ttl: 1800
 });
 
-// Create a new Spaces Bucket
+// Create a new Spaces Bucket for the processed photos to be uploaded to
 const photosBucket = new digitalocean.SpacesBucket("joshisa-ninja-photographs", {
   region: "nyc3",
   acl: "public-read",
+});
+
+// Create a new Spaces Bucket for the raw photos to be uploaded to
+const rawPhotosBucket = new digitalocean.SpacesBucket("joshisa-ninja-raw-photographs", {
+  region: "nyc3",
+  acl: "private",
 });
 
 // Create a DigitalOcean managed Let's Encrypt Certificate
@@ -93,3 +99,5 @@ const photosCDN = new digitalocean.Cdn("photographs-cdn", {
 export const domainName = domain.name;
 export const photoBucketDomain = photosBucket.bucketDomainName;
 export const photoBucketCDNDomain = photosCDN.endpoint;
+
+export const rawPhotoBucketDomain = rawPhotosBucket.bucketDomainName;

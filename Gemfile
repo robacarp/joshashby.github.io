@@ -11,6 +11,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 # Happy Jekylling!
 gem "jekyll", "~> 4.1.0"
 
+gem "ffi", "~> 1.15.3"
+
 # Required for now to get the line highlighting in the source_block
 # plugin
 gem "rouge", github: "rouge-ruby/rouge"
