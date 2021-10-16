@@ -1,53 +1,56 @@
 ---
-title: Web Extensions with Svelte and Rollup
+title: 'Web Extensions with Rollup: Getting Started'
 layout: post
 tags:
-- svelte
 - web-extensions
 - rollupjs
-- typescript
-- tailwindcss
 ---
 
-In most of my browser extensions, whether for transientBug, personal projects or one of my work contracts I inevitably end up needing some sort of UI. Historically I've used React and Parcel v1 due to the ease of entry into the space, however, this setup wasn't without it's issues. After a lot of experimenting with other stacks in the hopes of working past the issues, I've settled on a [Rollup.js](https://rollupjs.org/guide/en/) and [Svelte](https://svelte.dev/) based stack for newer project, and the experience has been amazing to say the least.
+I've built a number of personal and work related browser extensions over the years and, consequentally, I've tried a number of different patterns for building extensions. For simpler extensions the modern and lightweight [Vanilla JS](http://vanilla-js.com/) can take you pretty far, but sometimes more advanced tooling (or at least more "comfortable" tooling) is either necessary, or at a minimum, desired. For me, it's the latter. I prefer to use [TypeScript](https://www.typescriptlang.org/), [Svelte](https://svelte.dev/) and [Tailwind CSS](https://tailwindcss.com/) as I feel more productive with them and they afford me the developer experience that fits me best at this point in time.
 
-Today we'll walk through building a browser extension with a popup rendered by Svelte v3, and all bundled with Rollup v2; We'll include Typescript v4.3 and Tailwind CSS v2.2 as well since those are my go to tools and are also popular choices these days. And the best bit is that this extension will run in both Firefox and Chrome and be easily translatable to Safari, Chromium Edge, Vivaldi and other browsers that suppport the WebExtension API's.
+When making the leap from Vanilla JS, one of the first problems that comes up is how to bundle your code which leads to a myriad of choices ranging from older but steady Gulp setups, to stable Webpack all the way to newer and wave making Vite. Often times however, this space lacks attention to brower extension development flows, or presents patterns that are completely incompatable. Historically I've used a Parcel v1 setup, toyed with Webpack and Parcel v2, but over the last two and half years I've been starting new projects, and transitioning old ones, to using [Rollup.js](https://rollupjs.org/) because it provides me with the best over all experience for my needs.
 
-In follow up posts we'll add a "[web accessible](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/web_accessible_resources)" page, options page and even a content script that injects a UI directly onto the current page, all rendered with Svelte, and styled with Tailwind CSS. Tailwind, PostCSS and 
+Unfortunately, there wasn't much documentation about getting started with building browser extensions using Rollup.js when I started down this path, and the limited options of plugins and configuration builders that exist often target Chrome/Chromium based browsers only, and have a host of issues with building usable extensions for Firefox. For me, these are deal breakers as I use Firefox as my daily driver browser, and most of my extensions are personal use extensions so I need first class support for Firefox. Consequentally, I've had to forge my own path and figure this out as I go, and I figured I could document some of my learnings, or at least the final process, so today: we'll lay down the ground work and build a basic browser extension using plain old Rollup.js.
 
-#### Preface: The Why
-Last year, as I was working on an extension using a React/Parcel v1/Tailwind CSS v1 setup when Tailwind CSS v2 was released, but to my dismay while upgrading Tailwind I found that it wasn't going to play nicely with Parcel v1, even with using the PostCSS v7 compatability build. Around this time I also found Svelte v3 and immediately fell in love.
+<!--
+I'm hoping to write some additional posts to follow this one which will add typescript, svelte, and tailwindcss (or at least PostCSS) so stay tuned. Maybe I'll even write a tutorial that builds a useful extension like a copy of redirector or something.
+-->
+## What We'll Build Today
+We'll be setting up Rollup.js with some common plugins that will build a basic browser extension; The browser extension will be simple for now, mearly a background page that logs "Hello, World" to the console. We'll also cover how to install your browser extension and test it out in both Firefox and Chrome.
 
-Parcel v1 is suffering from being in a less than stellar maintenance mode for what feels like several years at this point, due to the team being focused on getting Parcel v2 out the door and as a result it's falling behind on integrations with tooling such as PostCSS. Tailwind V2 brought PostCSS v8 as a requirement, and Parcel v1 [will not be gaining](https://github.com/parcel-bundler/parcel/issues/5695) support for PostCSS v8. At this point I don't rememeber what other issues I ran into while trying to use the PostCSS v7 compatability build of Tailwind but it was enough to get me to start looking for alternatives.
+In future posts we'll explore building additional functionality that'll culminate in an extension that: registers a keyword trigger with the browser's URL bar, allows you to configure a set of "aliases" and will redirect you to those aliases when the keyword and alias are typed into the URL bar.
 
-After trying Parcel v2 and finding it still filled with bugs, edge cases and generally having a less than stellar time with it due to the plugin API constantly breaking which consequentally broke the Svelte plugin as well, I admittedly only glanced at webpack but passed due to a personal distaste for it. Because Svelte has a strong presence in the Rollup community (given that they're from the same author, Rich Harris, this makes a lot of sense) I decided to give it go.
+The complete extension will explore background pages, storage in extensions, dedicated pages within the extension for settings, and working with the browsers "web-extension" API. There might be some interludes along the way as well, including: injecting UI into a webpage and showing a popup from the browser action, among others.
 
-While Parcel has the advantage of [existing](https://github.com/kevincharm/parcel-plugin-web-extension) [plugins](https://v2.parceljs.org/recipes/web-extension/) that allow you to use a browser extensions `manifest.json` file as the entry point, letting Parcel automatically find, process and bundle all referenced scripts, assets and other files, Rollup doesn't have such a plugin/library/helper at the moment. That said, while it's nice to have a single point of truth for what gets compiled, I've found Rollups config is simple enough that it's not too difficult to expand for new assets and it's fairly easy to automate if you so desire.
+**Note** This extension will be built as a "Manifest v2" extension. While this extension should work just fine in Manifest v3 land, due to lack of non-chrome browser support and Googles apparent intent of [ramming through v3](https://www.theregister.com/2021/09/27/google_chrome_manifest_v2_extensions/) to try and styme the danger of ad blockers harming their business, under the guise of "security and performance," I will not be covering v3 topics at this time and will be focusing on v2 extensions.
 
+While I want everyone to go and research the topics to formulate their own opinions, I would recommend a few reading points, including [The Register on the cut to V3](https://www.theregister.com/2021/09/27/google_chrome_manifest_v2_extensions/), and Rich Harris's posts [In defense of the modern web](https://dev.to/richharris/in-defense-of-the-modern-web-2nia) and [Stay Alert](https://dev.to/richharris/stay-alert-d), on my beliefs about why Google may not be the bastion of good for todays Web that they claim to be.
 ## Setup
-After we're done with this section, our directory should look something like this:
+After we're done today, our directory should look something like this:
 
 ```
 .
 ├── src
-│   ├── assets
-│   ├── background
-│   │   ├── index.html
-│   │   └── index.js
-│   └── manifest.json
+│   ├── assets
+│   ├── background
+│   │   ├── index.html
+│   │   └── index.js
+│   └── manifest.json
 ├── package-lock.json
 ├── package.json
 ├── rollup.config.js
 ```
 
-And we'll have a browser extension that loads a basic background page that logs "Hello, World" to the console. A background page is used in browser extensions to implement long running logic and shared state between tabs, you can read more about them on [MDN here](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Anatomy_of_a_WebExtension#background_scripts). Our extension today won't make heavy use of the background script for now, but we'll expand on uses for it in future posts.
+And we'll have a browser extension that loads a basic background page that logs "Hello, World" to the console.
+
+A background page is used in browser extensions to implement long running logic and shared state between tabs, you can read more about them on [MDN here](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Anatomy_of_a_WebExtension#background_scripts). Our extension today won't make heavy use of the background script for now, but we'll expand on uses for it in future posts.
 
 <!-- tree -v --dirsfirst -I 'node_modules' -->
 
 Make a directory where ever best fits for you and cd into it:
 
 ```shell
-mkdir svelte-web-ext && cd svelte-web-ext
+mkdir web-ext && cd web-ext
 ```
 
 Go ahead and make `src/` and `src/assets/` in this directory too, as they'll come in handy later:
@@ -62,7 +65,7 @@ Then place the following into `package.json` and change the fields as necessary.
 
 ```json
 {
-  "name": "svelte-web-ext",
+  "name": "web-ext",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -112,7 +115,7 @@ export default [
         delimiters: ["", ""],
       }),
         
-      resolve({ browser: true, dedupe: ["svelte"], preferBuiltins: false }),
+      resolve({ browser: true, preferBuiltins: false }),
       commonjs(),
 
       copy({
@@ -175,13 +178,14 @@ As stated above, we'll being using the replace plugin to replace any occurance o
 {% source javascript hl_lines="2 3 4" %}
       resolve({
         browser: true,
-        dedupe: ["svelte"],
         preferBuiltins: false
       }),
       commonjs(),
 {% endsource %}
 
+<!--
 We need to tell the resolve plugin to act a little differently since we're bundling for a browser, by using any browser configurations found in imported `package.json`, to resolve `svelte` to a single node module (I haven't found an issue with leaving this out, but the official [Svelte Rollup](https://github.com/sveltejs/template/blob/f92a0a4dfda3a4eff6474ca242c8aea4be9260d1/rollup.config.js#L57) config uses it so I leave it in for now) and to not try and use Node built ins.
+-->
 
 **A Note:** I've personally had issues with the node built ins and haven't been able to get polyfills or remove the `preferBuiltins` flag, but it's only really effected a small number of packages that I have found alternatives for. If anyone has advice on how to get these to play nice together, shoot me a message and I'll give it a go and update this post!
 
@@ -201,7 +205,7 @@ We need to tell the resolve plugin to act a little differently since we're bundl
       }),
 {% endsource %}
 
-And finally we copy over some files. We don't want `dist/` hanging out in our repository so we'll copy it over from `src/`, so that it stays closer to the files it references. Additionally, we'll copy over an HTML file for `src/background/index.js` to live in (more on this in just a second), and finally we'll copy over all assets while we're at it; I throw fonts, SVGs, Logos and more into `src/assets/`.
+And finally we copy over some files. We don't want `dist/` hanging out in our repository so we'll copy it over from `src/`, so that it stays closer to the files it references. Additionally, we'll copy over an HTML file for `src/background/index.js` to live in (more on this in just a second), and finally we'll copy over all assets while we're at it; I throw fonts, SVGs, logos and more into `src/assets/`.
 
 We also need to add `src/background/index.js` and `src/background/index.html`. Because we're using ESM as the format for the bundled `dist/background/index.js` file, we'll use the `index.html` file to load the module to avoid issues. They'll look like this:
 
@@ -215,7 +219,7 @@ console.log("Hello, World!")
   <head>
     <meta charset="UTF-8" />
 
-    <title>Svelte Web Ext</title>
+    <title>Web Ext</title>
 
     <script type="module" src="./index.js"></script>
   </head>
@@ -233,7 +237,7 @@ Finally, the last part before we can fire up Rollup and give this a go, the magi
   "manifest_version": 2,
   
   "version": "1.0.0",
-  "name": "Svelte Web Ext",
+  "name": "Web Ext",
   "description": "",
 
   "background": {
@@ -304,17 +308,9 @@ Next, click on the "background/index.html" link to open the developer console to
 
 ![](/assets/2021-07-03-web-extensions-with-svelte-and-rollup/chrome-step-2.png)
 
-This'll open a new window with the developer tools for the extensions background page, you might have to navigate to "Console" but you should see out "Hello, World!" printed out!
+This'll open a new window with the developer tools for the extensions background page, you might have to navigate to "Console" but you should see out "Hello, World!" printed out just like in Forefox!
 
 ![](/assets/2021-07-03-web-extensions-with-svelte-and-rollup/chrome-step-3.png)
 
-
-### Svelte
-Now that we've got the ground work down with Rollup building our extension, we'll get Svelte installed
-
-### TypeScript
-If you'd like to not use TypeScript, it's safe to skip this section. The rest of the code in the Svelte components will be TypeScript, but it should be easy enough to remove the typings and be running with pure JS.
-###  PostCSS and Tailwind CSS
-If you'd like to not use PostCSS or Tailwind CSS, it's safe to skip this section. The rest of the styling in the Svelte components will be using Tailwind, but it should be easy enough to convert them to whatever CSS format you want to run with.
-
-## Pop-up Page
+### That's all, folks
+Well, for this post at least. Stay tuned for more posts in which we'll continue building off of this foundation and end up with a functional and, potentially, somewhat useful browser extension!
