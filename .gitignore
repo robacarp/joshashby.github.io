@@ -8,3 +8,12 @@ yarn-error.log
 deploy-*.tar.gz
 .env
 _raw_photos
+
+# Vite Ruby
+/public/vite
+/public/vite-dev
+/public/vite-test
+node_modules
+*.local
+.DS_Store
+

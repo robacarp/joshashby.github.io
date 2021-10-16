@@ -1,6 +1,3 @@
----
----
-
 /**
  * TODOS
  *  - Nav Menu items have a weird and not ideal click area
@@ -9,10 +6,6 @@
  *  -
  *
  **/
-
-
-
-
 .expandable {
   @apply bg-gray-800 overflow-hidden absolute left-0 w-full px-4;
 
@@ -35,12 +28,6 @@
   }
 }
 
-/*@screen xl {*/
-  /*.expandable {*/
-    /*max-height: 100vh;*/
-  /*}*/
-/*}*/
-
 .sidebar-nav {
   @apply w-full bg-gray-800 flex flex-row content-center justify-between items-baseline p-4 h-full border-0 border-b border-gray-700;
 
@@ -58,12 +45,6 @@
     @apply justify-center flex-col items-center h-auto border-0;
   }
 }
-
-/*@screen xl {*/
-  /*.sidebar-nav {*/
-    /*@apply h-screen justify-start;*/
-  /*}*/
-/*}*/
 
 ul.nav-list {
   @apply list-none px-0 py-2 w-full font-sans;
@@ -109,12 +90,6 @@ ul.nav-list {
   }
 }
 
-/*@screen xl {*/
-  /*.hamburger-bun {*/
-    /*@apply hidden;*/
-  /*}*/
-/*}*/
-
 body {
   @apply grid;
 
@@ -136,17 +111,6 @@ body {
   }
 }
 
-/*@screen xl {*/
-  /*body {*/
-    /*@apply mx-0;*/
-
-    /*grid:*/
-      /*"sidebar header header" auto*/
-      /*"sidebar content aside" auto*/
-      /*/ 16rem calc(100% - 32rem) 16rem;*/
-  /*}*/
-/*}*/
-
 #main-sidebar {
   @apply w-full flex flex-col sticky top-0;
 
@@ -157,17 +121,6 @@ body {
   #main-sidebar {
   }
 }
-
-
-/*@screen xl {*/
-  /*#main-sidebar {*/
-    /*@apply fixed justify-start;*/
-
-    /*width: 16rem;*/
-
-    /*min-height: 100vh;*/
-  /*}*/
-/*}*/
 
 main {
   grid-area: content;
@@ -180,12 +133,6 @@ main {
     @apply ml-0 mr-4;
   }
 }
-
-/*@screen xl {*/
-  /*main {*/
-    /*@apply flex-row ml-4 mr-0;*/
-  /*}*/
-/*}*/
 
 #page-header {
   /*grid-area: content;*/
@@ -202,12 +149,6 @@ main {
     @apply flex-row justify-between items-baseline mx-0;
   }
 }
-
-/*@screen xl {*/
-  /*#page-header {*/
-    /*@apply ml-4;*/
-  /*}*/
-/*}*/
 
 .post {
   /* Naked code tags */

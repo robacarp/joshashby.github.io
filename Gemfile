@@ -9,9 +9,10 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 #
 # This will help ensure the proper Jekyll version is running.
 # Happy Jekylling!
-gem "jekyll", "~> 4.1.0"
+gem "jekyll", "~> 4.2.1"
 
-gem "ffi", "~> 1.15.3"
+gem "webrick"
+# gem "ffi", "~> 1.15.3"
 
 # Required for now to get the line highlighting in the source_block
 # plugin
@@ -35,8 +36,9 @@ group :jekyll_plugins do
 
   gem "jekyll-admin"
 
-  gem "jekyll-postcss"
-  gem "jekyll-purgecss"
+  gem "jekyll-vite"
+  # gem "jekyll-postcss"
+  # gem "jekyll-purgecss"
 end
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
