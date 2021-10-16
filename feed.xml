@@ -1,4 +1,292 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://joshisa.ninja/feed.xml" rel="self" type="application/atom+xml" /><link href="https://joshisa.ninja/" rel="alternate" type="text/html" /><updated>2021-07-04T23:10:25+00:00</updated><id>https://joshisa.ninja/feed.xml</id><title type="html">Ashby’s Hideout</title><subtitle>I sometimes convert coffee into Ruby code. Rubber ducks are awesome.</subtitle><entry><title type="html">Using Github Actions to build a Jekyll 4 site and host it on Github Pages</title><link href="https://joshisa.ninja/2020/10/14/using-github-actions-to-build-a-jekyll-4-site-and-host-it-on-github-pages.html" rel="alternate" type="text/html" title="Using Github Actions to build a Jekyll 4 site and host it on Github Pages" /><published>2020-10-14T00:00:00+00:00</published><updated>2020-10-14T00:00:00+00:00</updated><id>https://joshisa.ninja/2020/10/14/using-github-actions-to-build-a-jekyll-4-site-and-host-it-on-github-pages</id><content type="html" xml:base="https://joshisa.ninja/2020/10/14/using-github-actions-to-build-a-jekyll-4-site-and-host-it-on-github-pages.html">&lt;p&gt;A while back I decided that I was going to move this site from an older &lt;a href=&quot;https://www.getlektor.com/&quot;&gt;Lektor&lt;/a&gt; setup to &lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; while retaining my Github Pages hosting setup. The reasons behind the move are little more than personal preference, but I had hoped to at least rid myself of Travis CI after being unhappy with Idera’s acquisition of it.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="https://joshisa.ninja/feed.xml" rel="self" type="application/atom+xml" /><link href="https://joshisa.ninja/" rel="alternate" type="text/html" /><updated>2021-10-16T23:28:34+00:00</updated><id>https://joshisa.ninja/feed.xml</id><title type="html">Ashby’s Hideout</title><subtitle>I sometimes convert coffee into code. Rubber ducks are awesome.</subtitle><entry><title type="html">Web Extensions with Rollup: Getting Started</title><link href="https://joshisa.ninja/2021/10/16/web-extensions-with-rollup-getting-started.html" rel="alternate" type="text/html" title="Web Extensions with Rollup: Getting Started" /><published>2021-10-16T00:00:00+00:00</published><updated>2021-10-16T00:00:00+00:00</updated><id>https://joshisa.ninja/2021/10/16/web-extensions-with-rollup-getting-started</id><content type="html" xml:base="https://joshisa.ninja/2021/10/16/web-extensions-with-rollup-getting-started.html">&lt;p&gt;I’ve built a number of personal and work related browser extensions over the years and, consequentally, I’ve tried a number of different patterns for building extensions. For simpler extensions the modern and lightweight &lt;a href=&quot;http://vanilla-js.com/&quot;&gt;Vanilla JS&lt;/a&gt; can take you pretty far, but sometimes more advanced tooling (or at least more “comfortable” tooling) is either necessary, or at a minimum, desired. For me, it’s the latter. I prefer to use &lt;a href=&quot;https://www.typescriptlang.org/&quot;&gt;TypeScript&lt;/a&gt;, &lt;a href=&quot;https://svelte.dev/&quot;&gt;Svelte&lt;/a&gt; and &lt;a href=&quot;https://tailwindcss.com/&quot;&gt;Tailwind CSS&lt;/a&gt; as I feel more productive with them and they afford me the developer experience that fits me best at this point in time.&lt;/p&gt;
+
+&lt;p&gt;When making the leap from Vanilla JS, one of the first problems that comes up is how to bundle your code which leads to a myriad of choices ranging from older but steady Gulp setups, to stable Webpack all the way to newer and wave making Vite. Often times however, this space lacks attention to brower extension development flows, or presents patterns that are completely incompatable. Historically I’ve used a Parcel v1 setup, toyed with Webpack and Parcel v2, but over the last two and half years I’ve been starting new projects, and transitioning old ones, to using &lt;a href=&quot;https://rollupjs.org/&quot;&gt;Rollup.js&lt;/a&gt; because it provides me with the best over all experience for my needs.&lt;/p&gt;
+
+&lt;p&gt;Unfortunately, there wasn’t much documentation about getting started with building browser extensions using Rollup.js when I started down this path, and the limited options of plugins and configuration builders that exist often target Chrome/Chromium based browsers only, and have a host of issues with building usable extensions for Firefox. For me, these are deal breakers as I use Firefox as my daily driver browser, and most of my extensions are personal use extensions so I need first class support for Firefox. Consequentally, I’ve had to forge my own path and figure this out as I go, and I figured I could document some of my learnings, or at least the final process, so today: we’ll lay down the ground work and build a basic browser extension using plain old Rollup.js.&lt;/p&gt;
+
+&lt;!--
+I'm hoping to write some additional posts to follow this one which will add typescript, svelte, and tailwindcss (or at least PostCSS) so stay tuned. Maybe I'll even write a tutorial that builds a useful extension like a copy of redirector or something.
+--&gt;
+&lt;h2 id=&quot;what-well-build-today&quot;&gt;What We’ll Build Today&lt;/h2&gt;
+&lt;p&gt;We’ll be setting up Rollup.js with some common plugins that will build a basic browser extension; The browser extension will be simple for now, mearly a background page that logs “Hello, World” to the console. We’ll also cover how to install your browser extension and test it out in both Firefox and Chrome.&lt;/p&gt;
+
+&lt;p&gt;In future posts we’ll explore building additional functionality that’ll culminate in an extension that: registers a keyword trigger with the browser’s URL bar, allows you to configure a set of “aliases” and will redirect you to those aliases when the keyword and alias are typed into the URL bar.&lt;/p&gt;
+
+&lt;p&gt;The complete extension will explore background pages, storage in extensions, dedicated pages within the extension for settings, and working with the browsers “web-extension” API. There might be some interludes along the way as well, including: injecting UI into a webpage and showing a popup from the browser action, among others.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; This extension will be built as a “Manifest v2” extension. While this extension should work just fine in Manifest v3 land, due to lack of non-chrome browser support and Googles apparent intent of &lt;a href=&quot;https://www.theregister.com/2021/09/27/google_chrome_manifest_v2_extensions/&quot;&gt;ramming through v3&lt;/a&gt; to try and styme the danger of ad blockers harming their business, under the guise of “security and performance,” I will not be covering v3 topics at this time and will be focusing on v2 extensions.&lt;/p&gt;
+
+&lt;p&gt;While I want everyone to go and research the topics to formulate their own opinions, I would recommend a few reading points, including &lt;a href=&quot;https://www.theregister.com/2021/09/27/google_chrome_manifest_v2_extensions/&quot;&gt;The Register on the cut to V3&lt;/a&gt;, and Rich Harris’s posts &lt;a href=&quot;https://dev.to/richharris/in-defense-of-the-modern-web-2nia&quot;&gt;In defense of the modern web&lt;/a&gt; and &lt;a href=&quot;https://dev.to/richharris/stay-alert-d&quot;&gt;Stay Alert&lt;/a&gt;, on my beliefs about why Google may not be the bastion of good for todays Web that they claim to be.&lt;/p&gt;
+&lt;h2 id=&quot;setup&quot;&gt;Setup&lt;/h2&gt;
+&lt;p&gt;After we’re done today, our directory should look something like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;.
+├── src
+│   ├── assets
+│   ├── background
+│   │   ├── index.html
+│   │   └── index.js
+│   └── manifest.json
+├── package-lock.json
+├── package.json
+├── rollup.config.js
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And we’ll have a browser extension that loads a basic background page that logs “Hello, World” to the console.&lt;/p&gt;
+
+&lt;p&gt;A background page is used in browser extensions to implement long running logic and shared state between tabs, you can read more about them on &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Anatomy_of_a_WebExtension#background_scripts&quot;&gt;MDN here&lt;/a&gt;. Our extension today won’t make heavy use of the background script for now, but we’ll expand on uses for it in future posts.&lt;/p&gt;
+
+&lt;!-- tree -v --dirsfirst -I 'node_modules' --&gt;
+
+&lt;p&gt;Make a directory where ever best fits for you and cd into it:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;web-ext &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;web-ext
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Go ahead and make &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;src/&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;src/assets/&lt;/code&gt; in this directory too, as they’ll come in handy later:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; src/assets/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;(The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-p&lt;/code&gt; flag will create &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;src/&lt;/code&gt; if it doesn’t exist before creating &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;src/assets/&lt;/code&gt;)&lt;/p&gt;
+
+&lt;p&gt;Then place the following into &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;package.json&lt;/code&gt; and change the fields as necessary. We’ll add to the scripts later on but it’s okay to be left empty for now (You can also create this file by running &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;npm init&lt;/code&gt; and answering the questions).&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;web-ext&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;1.0.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;description&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;scripts&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;author&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;license&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ISC&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Next lets install Rollup and some common plugins that we’ll come in handy down the line:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@rollup/plugin-commonjs&lt;/code&gt; Allows us to use CommonJS modules in our builds, especially for non-content scripts which will be bundled as ES modules.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@rollup/plugin-node-resolve&lt;/code&gt; Along with the CommonJS plugin, this allows us to import packages installed with NPM.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@rollup/plugin-replace&lt;/code&gt; To handle replacing common patterns, words and calls with a predefined format, such as replacing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;process.env.NODE_ENV&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rollup-plugin-copy&lt;/code&gt; Will help us copy assets and the manifest file to our build directory.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm i rollup @rollup/plugin-commonjs @rollup/plugin-node-resolve @rollup/plugin-replace rollup-plugin-copy &lt;span class=&quot;nt&quot;&gt;--save-dev&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We’ll add more plugins as we go but this’ll get us setup and running for now. Next we need to add some basic setup to our &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rollup.config.js&lt;/code&gt; to get our background page script &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;src/background/index.js&lt;/code&gt; compiling. Today we won’t do much with the background page script, but I’m using it here to get us up and running and we’ll expand on some use of it in future posts.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;commonjs&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;@rollup/plugin-commonjs&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;replace&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;@rollup/plugin-replace&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;@rollup/plugin-node-resolve&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;copy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;rollup-plugin-copy&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;production&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ROLLUP_WATCH&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;production&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;NODE_ENV&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;production&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;nodeEnv&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;NODE_ENV&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;development&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;src/background.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;sourcemap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;production&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;dist/background/&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;esm&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;plugins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;preventAssignment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;process.env.NODE_ENV&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;JSON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;stringify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;nodeEnv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;delimiters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}),&lt;/span&gt;
+        
+      &lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;browser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;preferBuiltins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}),&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;commonjs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+
+      &lt;span class=&quot;nx&quot;&gt;copy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;targets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;`src/manifest.json`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;dest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;dist/&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;src/background/index.html&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;dest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;dist/background/&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;src/assets/&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;dest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;dist/&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}),&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;watch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;clearScreen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;(One nice thing about Rollup is that the config file can be normal everyday ES6 syntax which means trailing commas, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;import&lt;/code&gt;/&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;export&lt;/code&gt; statements and destructuring.)&lt;/p&gt;
+
+&lt;p&gt;Let’s break this down:&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In Rollup you can export either a single config object or an array of config objects. We’ll jump straight to exporting an array of objects as we’ll add another configuration for the pop-up page later which will include the Svelte plugin and have some different needs around what gets copied over.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;nx&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;src/background/index.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nl&quot;&gt;sourcemap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;production&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;dist/background/&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;esm&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Here we’re telling Rollup that we’ll package &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;src/background/index.js&lt;/code&gt; as an ES module (via &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;format: &quot;esm&quot;&lt;/code&gt;), enabling or disabling sourcemaps according to if this is a production build, and place the output into &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dist/background&lt;/code&gt;. Rollup will take care of creating &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dist/&lt;/code&gt; and other directories if they doesn’t exist which is why we didn’t both with creating it before.&lt;/p&gt;
+
+&lt;p&gt;Finally let’s take a look at the plugins we’ll be using for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;src/background/index.js&lt;/code&gt;:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;div class=&quot;emphasized&quot;&gt;      &lt;span class=&quot;nx&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+&lt;span class=&quot;hll&quot;&gt;        &lt;span class=&quot;na&quot;&gt;preventAssignment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;/span&gt;        &lt;span class=&quot;na&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;hll&quot;&gt;          &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;process.env.NODE_ENV&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;JSON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;stringify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;nodeEnv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+&lt;/span&gt;        &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}),&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;As stated above, we’ll being using the replace plugin to replace any occurance of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;process.env.NODE_ENV&lt;/code&gt; with the value of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NODE_ENV&lt;/code&gt;. This might seem weird to have to do manually if you’re coming from Webpack or Parcel, but it’s a minimal addition to our config that I don’t mind having. We’re also telling the plugin that if it detects an assignment to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;process.env.NODE_ENV&lt;/code&gt;, it shouldn’t replace it with our hard coded string, via the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;preventAssignment&lt;/code&gt; option.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;div class=&quot;emphasized&quot;&gt;      &lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+&lt;span class=&quot;hll&quot;&gt;        &lt;span class=&quot;na&quot;&gt;browser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&quot;hll&quot;&gt;        &lt;span class=&quot;na&quot;&gt;preferBuiltins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&quot;hll&quot;&gt;      &lt;span class=&quot;p&quot;&gt;}),&lt;/span&gt;
+&lt;/span&gt;      &lt;span class=&quot;nx&quot;&gt;commonjs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;!--
+We need to tell the resolve plugin to act a little differently since we're bundling for a browser, by using any browser configurations found in imported `package.json`, to resolve `svelte` to a single node module (I haven't found an issue with leaving this out, but the official [Svelte Rollup](https://github.com/sveltejs/template/blob/f92a0a4dfda3a4eff6474ca242c8aea4be9260d1/rollup.config.js#L57) config uses it so I leave it in for now) and to not try and use Node built ins.
+--&gt;
+
+&lt;p&gt;&lt;strong&gt;A Note:&lt;/strong&gt; I’ve personally had issues with the node built ins and haven’t been able to get polyfills or remove the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;preferBuiltins&lt;/code&gt; flag, but it’s only really effected a small number of packages that I have found alternatives for. If anyone has advice on how to get these to play nice together, shoot me a message and I’ll give it a go and update this post!&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;div class=&quot;emphasized&quot;&gt;      &lt;span class=&quot;nx&quot;&gt;copy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;targets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;hll&quot;&gt;            &lt;span class=&quot;na&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;`src/manifest.json`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;/span&gt;            &lt;span class=&quot;na&quot;&gt;dest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;dist/&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;hll&quot;&gt;            &lt;span class=&quot;na&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;src/background/index.html&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;/span&gt;            &lt;span class=&quot;na&quot;&gt;dest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;dist/background/&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+&lt;span class=&quot;hll&quot;&gt;          &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;src/assets/&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;dest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;dist/&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+&lt;/span&gt;        &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}),&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;And finally we copy over some files. We don’t want &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dist/&lt;/code&gt; hanging out in our repository so we’ll copy it over from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;src/&lt;/code&gt;, so that it stays closer to the files it references. Additionally, we’ll copy over an HTML file for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;src/background/index.js&lt;/code&gt; to live in (more on this in just a second), and finally we’ll copy over all assets while we’re at it; I throw fonts, SVGs, logos and more into &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;src/assets/&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;We also need to add &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;src/background/index.js&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;src/background/index.html&lt;/code&gt;. Because we’re using ESM as the format for the bundled &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dist/background/index.js&lt;/code&gt; file, we’ll use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;index.html&lt;/code&gt; file to load the module to avoid issues. They’ll look like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Hello, World!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;lang=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;en&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;UTF-8&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Web Ext&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;module&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;./index.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;type=&quot;module&quot;&lt;/code&gt; attribute on the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;script&amp;gt;&lt;/code&gt; tag is the magic to get our ESM bundle to work.&lt;/p&gt;
+
+&lt;p&gt;Finally, the last part before we can fire up Rollup and give this a go, the magic &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;src/manifest.json&lt;/code&gt;&lt;/a&gt; file:&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;manifest_version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;1.0.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Web Ext&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;description&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;background&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;page&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;background/index.html&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;manifest.json&lt;/code&gt; file has to appear at the root of the packaged browser extension and informs the browser about scripts, permissions, and more that the extension requires. For now, the most important bit is the value of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;background&lt;/code&gt; key. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;background.page&lt;/code&gt; key tells the browser that it doesn’t need to create it’s own generic HTML page and should instead load our HTML from above which will load our script as an ES module without issue.&lt;/p&gt;
+
+&lt;p&gt;Finally, lets add two scripts to our &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;package.json&lt;/code&gt; to help us run Rollup in development and production modes:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-json&quot; data-lang=&quot;json&quot;&gt;&lt;div class=&quot;emphasized&quot;&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;scripts&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;hll&quot;&gt;&lt;span class=&quot;w&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;start:rollup&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;rollup -c -w&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&quot;hll&quot;&gt;&lt;span class=&quot;w&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;build:rollup&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;rollup -c&quot;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;,&lt;/span&gt;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-w&lt;/code&gt; flag tells Rollup to watch the files and rerun the build if anything changes, which comes in handy with developing and iterating.&lt;/p&gt;
+
+&lt;p&gt;With all that done, let’s give this extension a go and make sure things are working:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm run start:rollup
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If everything looks good, you should see:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rollup v2.52.7
+bundles src/background/index.js → dist/background...
+created dist/background in 14ms
+
+[2021-07-04 14:59:16] waiting for changes...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And now the moment of truth, does it run? We’ll cover both Firefox and Chrome and the process here for loading the development build of the extension won’t change as we add more features and functionality.&lt;/p&gt;
+
+&lt;h5 id=&quot;firefox&quot;&gt;Firefox&lt;/h5&gt;
+&lt;p&gt;In Firefox, type in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;about:debugging&lt;/code&gt; into the URL bar and press enter; On the left hand sidebar, select “This Firefox.”&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/2021-07-03-web-extensions-with-svelte-and-rollup/firefox-step-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;There should be a button labeled “Load Temporary Add-on…” but if it’s not visible, you might need to click on the “Temporary Extensions” section to expand it and display the button.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/2021-07-03-web-extensions-with-svelte-and-rollup/firefox-step-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click on the button and navigate to your built &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dist/&lt;/code&gt; directory and select the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;manifest.json&lt;/code&gt; file to load it your extension.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/2021-07-03-web-extensions-with-svelte-and-rollup/firefox-step-3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Next, click on the “Inspect” button on the newly loaded.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/2021-07-03-web-extensions-with-svelte-and-rollup/firefox-step-4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This’ll open up a new tab with a developer console and you should see our “Hello, World!” printed out!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/2021-07-03-web-extensions-with-svelte-and-rollup/firefox-step-5.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;h5 id=&quot;chrome&quot;&gt;Chrome&lt;/h5&gt;
+&lt;p&gt;In Chrome, type in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;about:extensions&lt;/code&gt; into the URL bar and press enter. You might need to make sure that that “Developer mode” switch is turned on in order to see the button “Load unpacked”&lt;/p&gt;
+
+&lt;p&gt;Click on “Load unpacked” and navigate to your extensions directory and select the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dist/&lt;/code&gt; directory to load your extension.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/2021-07-03-web-extensions-with-svelte-and-rollup/chrome-step-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Next, click on the “background/index.html” link to open the developer console to the background page’s context.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/2021-07-03-web-extensions-with-svelte-and-rollup/chrome-step-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This’ll open a new window with the developer tools for the extensions background page, you might have to navigate to “Console” but you should see out “Hello, World!” printed out just like in Forefox!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/2021-07-03-web-extensions-with-svelte-and-rollup/chrome-step-3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;thats-all-folks&quot;&gt;That’s all, folks&lt;/h3&gt;
+&lt;p&gt;Well, for this post at least. Stay tuned for more posts in which we’ll continue building off of this foundation and end up with a functional and, potentially, somewhat useful browser extension!&lt;/p&gt;</content><author><name></name></author><category term="web-extensions" /><category term="rollupjs" /><summary type="html">I’ve built a number of personal and work related browser extensions over the years and, consequentally, I’ve tried a number of different patterns for building extensions. For simpler extensions the modern and lightweight Vanilla JS can take you pretty far, but sometimes more advanced tooling (or at least more “comfortable” tooling) is either necessary, or at a minimum, desired. For me, it’s the latter. I prefer to use TypeScript, Svelte and Tailwind CSS as I feel more productive with them and they afford me the developer experience that fits me best at this point in time.</summary></entry><entry><title type="html">Using Github Actions to build a Jekyll 4 site and host it on Github Pages</title><link href="https://joshisa.ninja/2020/10/14/using-github-actions-to-build-a-jekyll-4-site-and-host-it-on-github-pages.html" rel="alternate" type="text/html" title="Using Github Actions to build a Jekyll 4 site and host it on Github Pages" /><published>2020-10-14T00:00:00+00:00</published><updated>2020-10-14T00:00:00+00:00</updated><id>https://joshisa.ninja/2020/10/14/using-github-actions-to-build-a-jekyll-4-site-and-host-it-on-github-pages</id><content type="html" xml:base="https://joshisa.ninja/2020/10/14/using-github-actions-to-build-a-jekyll-4-site-and-host-it-on-github-pages.html">&lt;p&gt;A while back I decided that I was going to move this site from an older &lt;a href=&quot;https://www.getlektor.com/&quot;&gt;Lektor&lt;/a&gt; setup to &lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; while retaining my Github Pages hosting setup. The reasons behind the move are little more than personal preference, but I had hoped to at least rid myself of Travis CI after being unhappy with Idera’s acquisition of it.&lt;/p&gt;
 
 &lt;p&gt;I initially planned on taking advantage of the automatic building and hosting of a &lt;a href=&quot;https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages/setting-up-a-github-pages-site-with-jekyll&quot;&gt;Jekyll site on Github Pages&lt;/a&gt;, however after seeing that I wouldn’t be able to have custom build steps such as using PostCSS for a custom theme and being locked into &lt;a href=&quot;https://pages.github.com/versions/&quot;&gt;Jekyll 3&lt;/a&gt;, I had to find my own way for building and deploying the site. Thankfully that’s an easy task now as a result of Github Actions which let me both ditch Travis CI and not have to worry about getting another CI runner authorized to push to the repo.&lt;/p&gt;
 
@@ -51,10 +339,10 @@
       &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@v2&lt;/span&gt;
         &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
 &lt;span class=&quot;err&quot;&gt;				  &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ref&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;source&lt;/span&gt;
-          &lt;span class=&quot;s&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;source&lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;source&lt;/span&gt;
 
-      &lt;span class=&quot;s&quot;&gt;- uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@v2&lt;/span&gt;
-        &lt;span class=&quot;s&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;s&quot;&gt;- uses&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@v2&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;
           &lt;span class=&quot;na&quot;&gt;ref&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;master&lt;/span&gt;
           &lt;span class=&quot;na&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;build&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
