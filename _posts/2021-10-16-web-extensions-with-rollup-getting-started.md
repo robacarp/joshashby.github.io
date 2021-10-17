@@ -160,7 +160,7 @@ In Rollup you can export either a single config object or an array of config obj
     },
 ```
 
-Here we're telling Rollup that we'll package `src/background/index.js` as an ES module (via `format: "esm"`), enabling or disabling sourcemaps according to if this is a production build, and place the output into `dist/background`. Rollup will take care of creating `dist/` and other directories if they doesn't exist which is why we didn't both with creating it before.
+Here we're telling Rollup that we'll package `src/background/index.js` as an ES module (via `format: "esm"`), enabling or disabling sourcemaps according to if this is a production build, and place the output into `dist/background`. Rollup will take care of creating `dist/` and other directories if they doesn't exist which is why we didn't bother with creating it before.
 
 Finally let's take a look at the plugins we'll be using for `src/background/index.js`:
 
@@ -207,7 +207,7 @@ We need to tell the resolve plugin to act a little differently since we're bundl
 
 And finally we copy over some files. We don't want `dist/` hanging out in our repository so we'll copy it over from `src/`, so that it stays closer to the files it references. Additionally, we'll copy over an HTML file for `src/background/index.js` to live in (more on this in just a second), and finally we'll copy over all assets while we're at it; I throw fonts, SVGs, logos and more into `src/assets/`.
 
-We also need to add `src/background/index.js` and `src/background/index.html`. Because we're using ESM as the format for the bundled `dist/background/index.js` file, we'll use the `index.html` file to load the module to avoid issues. They'll look like this:
+We also need to add `src/background/index.js` and `src/background/index.html`, we'll talk about why we need both in a little bit, they'll look like this:
 
 ```javascript
 console.log("Hello, World!")
@@ -246,7 +246,9 @@ Finally, the last part before we can fire up Rollup and give this a go, the magi
 }
 ```
 
-The `manifest.json` file has to appear at the root of the packaged browser extension and informs the browser about scripts, permissions, and more that the extension requires. For now, the most important bit is the value of the `background` key. The `background.page` key tells the browser that it doesn't need to create it's own generic HTML page and should instead load our HTML from above which will load our script as an ES module without issue.
+The `manifest.json` file has to appear at the root of the packaged browser extension and informs the browser about the scripts, permissions, and more that the extension requires. For now, the most important bit is the value of the `background` key. The `background.page` key tells the browser that it doesn't need to create it's own generic HTML page and should instead load our HTML from above which will load our script as an ES module without issue.
+
+If you took a look at the documentation for the `background` key in the manifest, you might be a little confused as to why we're using the `page` option and not the `scripts` option. As it turns out, the browsers don't support loading any ES module via the `scripts` option at the moment, even if they support ESM for web extensions. To get around this issue, we can create our own HTML page which pulls in our code as a module (with that fancy `type="module"` attribute on the `<script />` tag) and then tell the browser to use said page for the extensions background page with the `page` option. This isn't documented on MDN, unfortunately, but there are several other blog posts out there that cover this work around too.
 
 Finally, lets add two scripts to our `package.json` to help us run Rollup in development and production modes:
 
