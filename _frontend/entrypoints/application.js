@@ -9,3 +9,12 @@
 import "~/css/default.css"
 import "~/css/jashby.css"
 import "~/css/syntax.css"
+
+function annotation(node) {
+  node.addEventListener("click", e => {
+    e.preventDefault()
+    e.target.classList.toggle("-active")
+  })
+}
+
+document.querySelectorAll(".annotation-trigger").forEach(annotation)
