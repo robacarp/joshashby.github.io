@@ -1,10 +1,10 @@
 {
   "entrypoints/application.js": {
-    "file": "assets/application.bf9d1192.js",
+    "file": "assets/application.9fe47965.js",
     "src": "entrypoints/application.js",
     "isEntry": true,
     "css": [
-      "assets/application.45509c9e.css"
+      "assets/application.1ab1ea60.css"
     ]
   }
 }
