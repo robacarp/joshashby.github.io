@@ -90,6 +90,10 @@ body {
   }
 }
 
+#nav-links {
+  @apply w-full px-4 lg:mt-2 lg:p-0;
+}
+
 main {
   grid-area: content;
 
