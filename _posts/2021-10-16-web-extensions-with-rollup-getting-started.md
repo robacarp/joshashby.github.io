@@ -2,7 +2,7 @@
 title: Browser Extensions with Rollup - Getting Started
 layout: post
 tags:
-- web-extensions
+- browser-extension
 - rollupjs
 ---
 

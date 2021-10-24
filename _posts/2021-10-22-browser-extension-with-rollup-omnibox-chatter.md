@@ -2,8 +2,7 @@
 title: Browser Extension with Rollup - Omnibox Chatter
 layout: post
 tags:
-- web-extensions
-- browser extensions
+- browser-extension
 - rollupjs
 - typescript
 ---
