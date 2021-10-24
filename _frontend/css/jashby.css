@@ -6,6 +6,28 @@
  *  -
  *
  **/
+.expandable {
+  @apply bg-gray-800 overflow-hidden absolute left-0 w-full px-4;
+
+  top: 4rem;
+
+  transition: max-height 0.5s ease-in-out;
+  max-height: 0px;
+
+  &.expand {
+    max-height: 100vh;
+  }
+}
+
+@screen lg {
+  .expandable {
+    @apply relative mt-2 p-0;
+
+    top: initial;
+    max-height: initial;
+  }
+}
+
 .sidebar-nav {
   @apply w-full bg-gray-800 flex flex-row content-center justify-between items-baseline p-4 h-full border-0 border-b border-gray-700;
 
@@ -58,6 +80,16 @@ ul.nav-list {
   }
 }
 
+.hamburger-bun {
+  @apply flex flex-row justify-around;
+}
+
+@screen lg {
+  .hamburger-bun {
+    @apply hidden;
+  }
+}
+
 body {
   @apply grid;
 
@@ -88,10 +120,6 @@ body {
 @screen lg {
   #main-sidebar {
   }
-}
-
-#nav-links {
-  @apply w-full px-4 lg:mt-2 lg:p-0;
 }
 
 main {
