@@ -37,10 +37,10 @@ p {
   @apply py-2;
 }
 
-blockquote {
-  /* TODO: make this like <ol> and have the border hanging off the left */
-  @apply border-l-4 border-gray-900 my-6 py-2 px-4 italic;
-}
+/*blockquote {*/
+  /*[> TODO: make this like <ol> and have the border hanging off the left <]*/
+  /*@apply border-l-4 border-gray-900 my-6 py-2 px-4 italic;*/
+/*}*/
 
 img {
   @apply mx-auto my-8;
@@ -62,33 +62,33 @@ a:visited {
   @apply text-purple-700;
 }
 
-ol {
-  counter-reset: list;
+/*ol {*/
+  /*counter-reset: list;*/
 
-  & > li {
-    @apply my-3;
+  /*& > li {*/
+    /*@apply my-3;*/
 
-    list-style-position: none;
-    position: relative;
-    list-style: none;
+    /*list-style-position: none;*/
+    /*position: relative;*/
+    /*list-style: none;*/
 
-    &:before {
-      @apply font-mono;
+    /*&:before {*/
+      /*@apply font-mono;*/
 
-      content: "[" counter(list, decimal) "] ";
-      counter-increment: list;
-    }
-  }
-}
+      /*content: "[" counter(list, decimal) "] ";*/
+      /*counter-increment: list;*/
+    /*}*/
+  /*}*/
+/*}*/
 
-ul {
-  @apply list-disc;
+/*ul {*/
+  /*@apply list-disc;*/
 
-  padding: 0 20px 0 20px;
+  /*padding: 0 20px 0 20px;*/
 
-  & > li {
-    margin: 5px 0 5px 0;
-  }
-}
+  /*& > li {*/
+    /*margin: 5px 0 5px 0;*/
+  /*}*/
+/*}*/
 
 @tailwind utilities;
