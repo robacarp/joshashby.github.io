@@ -4,5 +4,5 @@ set -Eeuo pipefail
 export DO_SPACES_ENDPOINT="https://nyc3.digitaloceanspaces.com"
 export DO_SPACE_NAME="joshisa-ninja-photographs-ccdda0f"
 
-echo "Uploading site to DO space ..."
+echo "Uploading photos to DO space ..."
 aws s3 cp photos/ "s3://${DO_SPACE_NAME}/" --recursive --endpoint ${DO_SPACES_ENDPOINT} --acl public-read

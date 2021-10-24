@@ -51,9 +51,22 @@ CDN.
 
 Currently it consists of two little bash scripts and a Jekyll data file:
 
-`photify` which takes in a name, without extension (odd i know), for a file in
-`_raw_photos` and resizes, strips exif and recompresses it to 400, 600, 800,
-1000, and 2000 pixels wide and writes the scaled images out to `photos/`.
+`photify` which takes in the path for a photo and resizes, strips exif and recompresses it to 400, 600, 800,
+1000, and 2000 pixels wide and writes the scaled images out to `photos/`:
+
+```
+bin/photify _raw_photos/blehp_chief.jpg
+Converting _raw_photos/blehp_chief.jpg -> photos/blehp_chief-400.jpg
+    19M --> 24K
+Converting _raw_photos/blehp_chief.jpg -> photos/blehp_chief-600.jpg
+    19M --> 44K
+Converting _raw_photos/blehp_chief.jpg -> photos/blehp_chief-800.jpg
+    19M --> 68K
+Converting _raw_photos/blehp_chief.jpg -> photos/blehp_chief-1000.jpg
+    19M --> 100K
+Converting _raw_photos/blehp_chief.jpg -> photos/blehp_chief-2000.jpg
+    19M --> 300K
+```
 
 `upload-photos` does what it says on the tin. It uploads the processed photos
 up to the CDN Bucket.
