@@ -15,7 +15,7 @@ Such as this one!
 {% endaside %} inside of them too.
 {% endaside %}
 
-In the [previous post](/2021/10/16/web-extensions-with-rollup-getting-started.html), we laid down the groundwork for building a browser extension using [Rollup.js](https://rollupjs.org/) that logged "Hello, World!" out to the extensions background page's console. Today we'll take that idea a little further and start to tie into the browser's "Omnibox," which will let the browser give our extension the users input into the URL bar after they've entered a keyword with which we'll register in the extensions `manifest.json`. As part of this, we'll set up TypeScript, 
+In the [previous post](/2021/10/16/web-extensions-with-rollup-getting-started.html), we laid down the groundwork for building a browser extension using [Rollup.js](https://rollupjs.org/) that logged "Hello, World!" out to the extensions background page's console. Today we'll take that idea a little further and start to tie into the browser's "Omnibox," which will let the browser give our extension the users input into the URL bar after they've entered a keyword with which we'll register in the extensions `manifest.json`. As part of this, we'll set up TypeScript and a polyfill to help us out.
 
 As a reminder of what we're building through this series: A simple browser extension that allows for the creation of "aliases" via the URL bar, e.g., if the browser extension registers `goto` as the keyword, the user could set up the alias `github/me` to go to their GitHub profile and type in `goto github/me` to the URL bar to make use of the alias; Similar to [Redirector](https://github.com/einaregilsson/Redirector).
 
