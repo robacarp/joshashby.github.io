@@ -83,7 +83,7 @@ document.querySelectorAll("[data-behavior~=toggle-hidden]").forEach(elem => {
 This post contains inline annotations/footnotes to help add context, helpful tips or expand upon a tangent in the text. Expand them by <a href="#annotation-1" class="annotation-trigger -gray">clicking or tapping on them</a>
 <span id="annotation-1" class="annotation">Annotations might have their own <a href="#annotation-2" class="annotation-trigger -red">annotations</a><span id="annotation-2" class="annotation">Such as this one!</span> inside of them too.</span></em></p>
 
-<p>In the <a href="/2021/10/16/web-extensions-with-rollup-getting-started.html">previous post</a>, we laid down the groundwork for building a browser extension using <a href="https://rollupjs.org/">Rollup.js</a> that logged “Hello, World!” out to the extensions background page’s console. Today we’ll take that idea a little further and start to tie into the browser’s “Omnibox,” which will let the browser give our extension the users input into the URL bar after they’ve entered a keyword with which we’ll register in the extensions <code class="language-plaintext highlighter-rouge">manifest.json</code>. As part of this, we’ll set up TypeScript,</p>
+<p>In the <a href="/2021/10/16/web-extensions-with-rollup-getting-started.html">previous post</a>, we laid down the groundwork for building a browser extension using <a href="https://rollupjs.org/">Rollup.js</a> that logged “Hello, World!” out to the extensions background page’s console. Today we’ll take that idea a little further and start to tie into the browser’s “Omnibox,” which will let the browser give our extension the users input into the URL bar after they’ve entered a keyword with which we’ll register in the extensions <code class="language-plaintext highlighter-rouge">manifest.json</code>. As part of this, we’ll set up TypeScript and a polyfill to help us out.</p>
 
 <p>As a reminder of what we’re building through this series: A simple browser extension that allows for the creation of “aliases” via the URL bar, e.g., if the browser extension registers <code class="language-plaintext highlighter-rouge">goto</code> as the keyword, the user could set up the alias <code class="language-plaintext highlighter-rouge">github/me</code> to go to their GitHub profile and type in <code class="language-plaintext highlighter-rouge">goto github/me</code> to the URL bar to make use of the alias; Similar to <a href="https://github.com/einaregilsson/Redirector">Redirector</a>.</p>
 
@@ -344,7 +344,7 @@ created dist/background in 1s
   
 <script src="/vite/assets/application.9fe47965.js" crossorigin="anonymous" type="module"></script>
 
-<link href="/vite/assets/application.cb0e24fd.css" rel="stylesheet" media="screen" crossorigin="anonymous"/>
+<link href="/vite/assets/application.68c21c91.css" rel="stylesheet" media="screen" crossorigin="anonymous"/>
 
 </body>
 </html>
