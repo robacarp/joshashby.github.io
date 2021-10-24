@@ -14,15 +14,15 @@
 <meta name="generator" content="Jekyll v4.2.1" />
 <meta property="og:title" content="Web Extensions with Rollup: Getting Started" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="I’ve built a number of personal and work related browser extensions over the years and, consequentally, I’ve tried a number of different patterns for building extensions. For simpler extensions the modern and lightweight Vanilla JS can take you pretty far, but sometimes more advanced tooling (or at least more “comfortable” tooling) is either necessary, or at a minimum, desired. For me, it’s the latter. I prefer to use TypeScript, Svelte and Tailwind CSS as I feel more productive with them and they afford me the developer experience that fits me best at this point in time." />
-<meta property="og:description" content="I’ve built a number of personal and work related browser extensions over the years and, consequentally, I’ve tried a number of different patterns for building extensions. For simpler extensions the modern and lightweight Vanilla JS can take you pretty far, but sometimes more advanced tooling (or at least more “comfortable” tooling) is either necessary, or at a minimum, desired. For me, it’s the latter. I prefer to use TypeScript, Svelte and Tailwind CSS as I feel more productive with them and they afford me the developer experience that fits me best at this point in time." />
+<meta name="description" content="This post contains inline annotations/footnotes to help add context, helpful tips or expand upon a tanget in the text. Expand them by clicking or tapping on them Annotations might have their own annotationsSuch as this one! inside of them too. Updated 2021-Oct-23 to cleanup some wording and adjust some formatting things" />
+<meta property="og:description" content="This post contains inline annotations/footnotes to help add context, helpful tips or expand upon a tanget in the text. Expand them by clicking or tapping on them Annotations might have their own annotationsSuch as this one! inside of them too. Updated 2021-Oct-23 to cleanup some wording and adjust some formatting things" />
 <link rel="canonical" href="https://joshisa.ninja/2021/10/16/web-extensions-with-rollup-getting-started.html" />
 <meta property="og:url" content="https://joshisa.ninja/2021/10/16/web-extensions-with-rollup-getting-started.html" />
 <meta property="og:site_name" content="Ashby’s Hideout" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-10-16T00:00:00+00:00" />
 <script type="application/ld+json">
-{"description":"I’ve built a number of personal and work related browser extensions over the years and, consequentally, I’ve tried a number of different patterns for building extensions. For simpler extensions the modern and lightweight Vanilla JS can take you pretty far, but sometimes more advanced tooling (or at least more “comfortable” tooling) is either necessary, or at a minimum, desired. For me, it’s the latter. I prefer to use TypeScript, Svelte and Tailwind CSS as I feel more productive with them and they afford me the developer experience that fits me best at this point in time.","url":"https://joshisa.ninja/2021/10/16/web-extensions-with-rollup-getting-started.html","@type":"BlogPosting","headline":"Web Extensions with Rollup: Getting Started","dateModified":"2021-10-16T00:00:00+00:00","datePublished":"2021-10-16T00:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://joshisa.ninja/2021/10/16/web-extensions-with-rollup-getting-started.html"},"@context":"https://schema.org"}</script>
+{"description":"This post contains inline annotations/footnotes to help add context, helpful tips or expand upon a tanget in the text. Expand them by clicking or tapping on them Annotations might have their own annotationsSuch as this one! inside of them too. Updated 2021-Oct-23 to cleanup some wording and adjust some formatting things","url":"https://joshisa.ninja/2021/10/16/web-extensions-with-rollup-getting-started.html","@type":"BlogPosting","headline":"Web Extensions with Rollup: Getting Started","dateModified":"2021-10-16T00:00:00+00:00","datePublished":"2021-10-16T00:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://joshisa.ninja/2021/10/16/web-extensions-with-rollup-getting-started.html"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 </head>
@@ -32,7 +32,7 @@
   <nav class="sidebar-nav">
     <h2><a href="/">Ashby's Hideout</a></h2>
 
-    <div id="nav-links">
+    <div id="nav-links" class="expandable">
       <ul class="nav-list">
         <li class="nav-item"><a href="/posts/">Posts</a></li>
         <li class="nav-item"><a href="/photos/">Photos</a></li>
@@ -42,8 +42,27 @@
         
       </ul>
     </div>
+
+    <div class="hamburger-bun">
+      <button class="nav-item" data-behavior="toggle-hidden" data-target="#nav-links">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+    </div>
+
+    <!--<div class="flex flex-row content-center justify-between self-center w-full px-4 lg:flex-col lg:items-center">-->
+    <!--</div>-->
   </nav>
 </section>
+
+<script>
+document.querySelectorAll("[data-behavior~=toggle-hidden]").forEach(elem => {
+  const dataTarget = document.querySelector(elem.dataset.target)
+
+  elem.addEventListener("click", e => {
+    dataTarget.classList.toggle("expand")
+  })
+})
+</script>
 
 
   <main>
@@ -60,15 +79,17 @@
     </header>
 
     <article class="post prose">
-      <p>I’ve built a number of personal and work related browser extensions over the years and, consequentally, I’ve tried a number of different patterns for building extensions. For simpler extensions the modern and lightweight <a href="http://vanilla-js.com/">Vanilla JS</a> can take you pretty far, but sometimes more advanced tooling (or at least more “comfortable” tooling) is either necessary, or at a minimum, desired. For me, it’s the latter. I prefer to use <a href="https://www.typescriptlang.org/">TypeScript</a>, <a href="https://svelte.dev/">Svelte</a> and <a href="https://tailwindcss.com/">Tailwind CSS</a> as I feel more productive with them and they afford me the developer experience that fits me best at this point in time.</p>
+      <p><em>
+This post contains inline annotations/footnotes to help add context, helpful tips or expand upon a tanget in the text. Expand them by <a href="#annotation-1" class="annotation-trigger -gray">clicking or tapping on them</a>
+<span id="annotation-1" class="annotation">Annotations might have their own <a href="#annotation-2" class="annotation-trigger -red">annotations</a><span id="annotation-2" class="annotation">Such as this one!</span> inside of them too.</span></em></p>
+
+<p><em>Updated 2021-Oct-23 to cleanup some wording and adjust some formatting things</em></p>
+
+<p>I’ve built a number of personal and work related browser extensions over the years and, consequentally, I’ve tried a number of different patterns for building extensions. For simpler extensions the modern and lightweight <a href="http://vanilla-js.com/">Vanilla JS</a> can take you pretty far, but sometimes more advanced tooling (or at least more “comfortable” tooling) is either necessary, or at a minimum, desired. For me, it’s the latter. I prefer to use <a href="https://www.typescriptlang.org/">TypeScript</a>, <a href="https://svelte.dev/">Svelte</a> and <a href="https://tailwindcss.com/">Tailwind CSS</a> as I feel more productive with them and they afford me the developer experience that fits me best at this point in time.</p>
 
 <p>When making the leap from Vanilla JS, one of the first problems that comes up is how to bundle your code which leads to a myriad of choices ranging from older but steady Gulp setups, to stable Webpack all the way to newer and wave making Vite. Often times however, this space lacks attention to brower extension development flows, or presents patterns that are completely incompatable. Historically I’ve used a Parcel v1 setup, toyed with Webpack and Parcel v2, but over the last two and half years I’ve been starting new projects, and transitioning old ones, to using <a href="https://rollupjs.org/">Rollup.js</a> because it provides me with the best over all experience for my needs.</p>
 
 <p>Unfortunately, there wasn’t much documentation about getting started with building browser extensions using Rollup.js when I started down this path, and the limited options of plugins and configuration builders that exist often target Chrome/Chromium based browsers only, and have a host of issues with building usable extensions for Firefox. For me, these are deal breakers as I use Firefox as my daily driver browser, and most of my extensions are personal use extensions so I need first class support for Firefox. Consequentally, I’ve had to forge my own path and figure this out as I go, and I figured I could document some of my learnings, or at least the final process, so today: we’ll lay down the ground work and build a basic browser extension using plain old Rollup.js.</p>
-
-<!--
-I'm hoping to write some additional posts to follow this one which will add typescript, svelte, and tailwindcss (or at least PostCSS) so stay tuned. Maybe I'll even write a tutorial that builds a useful extension like a copy of redirector or something.
--->
 <h2 id="what-well-build-today">What We’ll Build Today</h2>
 <p>We’ll be setting up Rollup.js with some common plugins that will build a basic browser extension; The browser extension will be simple for now, mearly a background page that logs “Hello, World” to the console. We’ll also cover how to install your browser extension and test it out in both Firefox and Chrome.</p>
 
@@ -76,10 +97,10 @@ I'm hoping to write some additional posts to follow this one which will add type
 
 <p>The complete extension will explore background pages, storage in extensions, dedicated pages within the extension for settings, and working with the browsers “web-extension” API. There might be some interludes along the way as well, including: injecting UI into a webpage and showing a popup from the browser action, among others.</p>
 
-<p><strong>Note</strong> This extension will be built as a “Manifest v2” extension. While this extension should work just fine in Manifest v3 land, due to lack of non-chrome browser support and Googles apparent intent of <a href="https://www.theregister.com/2021/09/27/google_chrome_manifest_v2_extensions/">ramming through v3</a> to try and styme the danger of ad blockers harming their business, under the guise of “security and performance,” I will not be covering v3 topics at this time and will be focusing on v2 extensions.</p>
+<p class="callout info"><strong>Note</strong> This extension will be built as a “Manifest v2” extension. While this extension should work just fine in Manifest v3 land, due to lack of non-chrome browser support and Googles apparent intent of <a href="https://www.theregister.com/2021/09/27/google_chrome_manifest_v2_extensions/">ramming through v3</a> to try and styme the danger of ad blockers harming their business, under the guise of “security and performance,” <a href="#annotation-3" class="annotation-trigger -gray">I will not be covering v3 topics at this time and will be focusing on v2 extensions.</a>
+<span id="annotation-3" class="annotation">While I want everyone to go and research the topics to formulate their own opinions, I would recommend a few reading points, including <a href="https://www.theregister.com/2021/09/27/google_chrome_manifest_v2_extensions/">The Register on the cut to V3</a>, and Rich Harris’ posts <a href="https://dev.to/richharris/in-defense-of-the-modern-web-2nia">In defense of the modern web</a> and <a href="https://dev.to/richharris/stay-alert-d">Stay Alert</a>, on my beliefs about why Google may not be the bastion of good for todays Web that they claim to be.</span></p>
 
-<p>While I want everyone to go and research the topics to formulate their own opinions, I would recommend a few reading points, including <a href="https://www.theregister.com/2021/09/27/google_chrome_manifest_v2_extensions/">The Register on the cut to V3</a>, and Rich Harris’s posts <a href="https://dev.to/richharris/in-defense-of-the-modern-web-2nia">In defense of the modern web</a> and <a href="https://dev.to/richharris/stay-alert-d">Stay Alert</a>, on my beliefs about why Google may not be the bastion of good for todays Web that they claim to be.</p>
-<h2 id="setup">Setup</h2>
+<h2 id="preparations">Preparations</h2>
 <p>After we’re done today, our directory should look something like this:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
@@ -125,6 +146,7 @@ I'm hoping to write some additional posts to follow this one which will add type
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
+<h2 id="setup---rollup">Setup - Rollup</h2>
 <p>Next lets install Rollup and some common plugins that we’ll come in handy down the line:</p>
 
 <ul>
@@ -224,14 +246,13 @@ I'm hoping to write some additional posts to follow this one which will add type
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><div class="emphasized">      <span class="nx">resolve</span><span class="p">({</span>
 <span class="hll">        <span class="na">browser</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
 </span><span class="hll">        <span class="na">preferBuiltins</span><span class="p">:</span> <span class="kc">false</span>
-</span><span class="hll">      <span class="p">}),</span>
-</span>      <span class="nx">commonjs</span><span class="p">(),</span></div></code></pre></figure>
+</span>      <span class="p">}),</span>
+<span class="hll">      <span class="nx">commonjs</span><span class="p">(),</span>
+</span></div></code></pre></figure>
 
-<!--
-We need to tell the resolve plugin to act a little differently since we're bundling for a browser, by using any browser configurations found in imported `package.json`, to resolve `svelte` to a single node module (I haven't found an issue with leaving this out, but the official [Svelte Rollup](https://github.com/sveltejs/template/blob/f92a0a4dfda3a4eff6474ca242c8aea4be9260d1/rollup.config.js#L57) config uses it so I leave it in for now) and to not try and use Node built ins.
--->
+<p>We need to tell the resolve plugin to act a little differently since we’re bundling for a browser, by using any browser configurations found in imported <code class="language-plaintext highlighter-rouge">package.json</code> and to not try and use Node built ins. We also add support for pulling in CommonJS modules even if we’re bundling as an ESM which will greatly increase the number of npm packages we can make use of.</p>
 
-<p><strong>A Note:</strong> I’ve personally had issues with the node built ins and haven’t been able to get polyfills or remove the <code class="language-plaintext highlighter-rouge">preferBuiltins</code> flag, but it’s only really effected a small number of packages that I have found alternatives for. If anyone has advice on how to get these to play nice together, shoot me a message and I’ll give it a go and update this post!</p>
+<p class="callout">I’ve had issues with the node built ins and haven’t been able to get polyfills to work or been able to remove the <code class="language-plaintext highlighter-rouge">preferBuiltins</code> flag. It’s only effected a small number of packages, which I’ve been able to find alternatives for so I just leave this flag in place for now. If anyone has advice on how to get these to play nice together, shoot me a message, I’ll give it a go and update this post!</p>
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><div class="emphasized">      <span class="nx">copy</span><span class="p">({</span>
         <span class="na">targets</span><span class="p">:</span> <span class="p">[</span>
@@ -249,6 +270,7 @@ We need to tell the resolve plugin to act a little differently since we're bundl
 
 <p>And finally we copy over some files. We don’t want <code class="language-plaintext highlighter-rouge">dist/</code> hanging out in our repository so we’ll copy it over from <code class="language-plaintext highlighter-rouge">src/</code>, so that it stays closer to the files it references. Additionally, we’ll copy over an HTML file for <code class="language-plaintext highlighter-rouge">src/background/index.js</code> to live in (more on this in just a second), and finally we’ll copy over all assets while we’re at it; I throw fonts, SVGs, logos and more into <code class="language-plaintext highlighter-rouge">src/assets/</code>.</p>
 
+<h2 id="setup---browser-extension">Setup - Browser Extension</h2>
 <p>We also need to add <code class="language-plaintext highlighter-rouge">src/background/index.js</code> and <code class="language-plaintext highlighter-rouge">src/background/index.html</code>, we’ll talk about why we need both in a little bit, they’ll look like this:</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Hello, World!</span><span class="dl">"</span><span class="p">)</span>
@@ -270,7 +292,7 @@ We need to tell the resolve plugin to act a little differently since we're bundl
 
 <p>The <code class="language-plaintext highlighter-rouge">type="module"</code> attribute on the <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> tag is the magic to get our ESM bundle to work.</p>
 
-<p>Finally, the last part before we can fire up Rollup and give this a go, the magic <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json"><code class="language-plaintext highlighter-rouge">src/manifest.json</code></a> file:</p>
+<p>The last part before we can fire up Rollup and give this a go, the magic <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json"><code class="language-plaintext highlighter-rouge">src/manifest.json</code></a> file:</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"manifest_version"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
@@ -285,11 +307,10 @@ We need to tell the resolve plugin to act a little differently since we're bundl
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>The <code class="language-plaintext highlighter-rouge">manifest.json</code> file has to appear at the root of the packaged browser extension and informs the browser about the scripts, permissions, and more that the extension requires. For now, the most important bit is the value of the <code class="language-plaintext highlighter-rouge">background</code> key. The <code class="language-plaintext highlighter-rouge">background.page</code> key tells the browser that it doesn’t need to create it’s own generic HTML page and should instead load our HTML from above which will load our script as an ES module without issue.</p>
+<p>The <code class="language-plaintext highlighter-rouge">manifest.json</code> file has to appear at the root of the packaged browser extension and informs the browser about the scripts, permissions, and more that the extension requires. For now, the most important bit is the value of the <code class="language-plaintext highlighter-rouge">background</code> key. The <code class="language-plaintext highlighter-rouge">background.page</code> key tells the browser that it doesn’t need to create it’s own generic HTML page and should instead load our HTML from above which will load our script as an <a href="#annotation-4" class="annotation-trigger -gray">ES module without issue.</a>
+<span id="annotation-4" class="annotation">If you took a look at the documentation for the <code class="language-plaintext highlighter-rouge">background</code> key in the manifest, you might be a little confused as to why we’re using the <code class="language-plaintext highlighter-rouge">page</code> option and not the <code class="language-plaintext highlighter-rouge">scripts</code> option. As it turns out, the browsers don’t support loading any ES module via the <code class="language-plaintext highlighter-rouge">scripts</code> option at the moment, even if they support ESM for web extensions. To get around this issue, we can create our own HTML page which pulls in our code as a module (with that fancy <code class="language-plaintext highlighter-rouge">type="module"</code> attribute on the <code class="language-plaintext highlighter-rouge">&lt;script /&gt;</code> tag) and then tell the browser to use said page for the extensions background page with the <code class="language-plaintext highlighter-rouge">page</code> option. This isn’t documented on MDN, unfortunately, but there are several other blog posts out there that cover this work around too.</span></p>
 
-<p>If you took a look at the documentation for the <code class="language-plaintext highlighter-rouge">background</code> key in the manifest, you might be a little confused as to why we’re using the <code class="language-plaintext highlighter-rouge">page</code> option and not the <code class="language-plaintext highlighter-rouge">scripts</code> option. As it turns out, the browsers don’t support loading any ES module via the <code class="language-plaintext highlighter-rouge">scripts</code> option at the moment, even if they support ESM for web extensions. To get around this issue, we can create our own HTML page which pulls in our code as a module (with that fancy <code class="language-plaintext highlighter-rouge">type="module"</code> attribute on the <code class="language-plaintext highlighter-rouge">&lt;script /&gt;</code> tag) and then tell the browser to use said page for the extensions background page with the <code class="language-plaintext highlighter-rouge">page</code> option. This isn’t documented on MDN, unfortunately, but there are several other blog posts out there that cover this work around too.</p>
-
-<p>Finally, lets add two scripts to our <code class="language-plaintext highlighter-rouge">package.json</code> to help us run Rollup in development and production modes:</p>
+<p>Lets add two scripts to our <code class="language-plaintext highlighter-rouge">package.json</code> to help us run Rollup in development and production modes a little easier:</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><div class="emphasized"><span class="w">  </span><span class="nl">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="hll"><span class="w">    </span><span class="nl">"start:rollup"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rollup -c -w"</span><span class="p">,</span>
@@ -298,12 +319,13 @@ We need to tell the resolve plugin to act a little differently since we're bundl
 
 <p>The <code class="language-plaintext highlighter-rouge">-w</code> flag tells Rollup to watch the files and rerun the build if anything changes, which comes in handy with developing and iterating.</p>
 
-<p>With all that done, let’s give this extension a go and make sure things are working:</p>
+<h2 id="but--does-it-run">But … Does it Run?</h2>
+<p>With all that done, let us give this extension a go and make sure things are working:</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm run start:rollup
 </code></pre></div></div>
 
-<p>If everything looks good, you should see:</p>
+<p>If everything looks good, you should see something similar to the following:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rollup v2.52.7
 bundles src/background/index.js → dist/background...
@@ -349,7 +371,7 @@ created dist/background in 14ms
 
 <p><img src="/assets/2021-07-03-web-extensions-with-svelte-and-rollup/chrome-step-3.png" alt="" /></p>
 
-<h3 id="thats-all-folks">That’s all, folks</h3>
+<h2 id="thats-all-folks">That’s all, folks</h2>
 <p>Well, for this post at least. Stay tuned for more posts in which we’ll continue building off of this foundation and end up with a functional and, potentially, somewhat useful browser extension!</p>
 
     </article>
@@ -358,7 +380,7 @@ created dist/background in 14ms
   
 <script src="/vite/assets/application.9fe47965.js" crossorigin="anonymous" type="module"></script>
 
-<link href="/vite/assets/application.7000e241.css" rel="stylesheet" media="screen" crossorigin="anonymous"/>
+<link href="/vite/assets/application.6adf4e37.css" rel="stylesheet" media="screen" crossorigin="anonymous"/>
 
 </body>
 </html>
