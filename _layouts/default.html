@@ -4,8 +4,12 @@
 <body>
   {% include nav.html %}
 
-  <main>
-    {{ content }}
+  <main class="mt-0 lg:mt-5">
+    <article class="prose">
+      {{ content }}
+    </article>
+
+    {% include content_footer.html %}
   </main>
 
   {% include footer.html %}

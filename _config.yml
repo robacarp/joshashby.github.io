@@ -22,7 +22,7 @@ title: Ashby's Hideout
 name: Josh Ashby
 email: blarg@joshisa.ninja
 description: >- # this means to ignore newlines until "baseurl:"
-  I sometimes convert coffee into code. Rubber ducks are awesome.
+  Sometimes I convert coffee into code. Rubber ducks are awesome.
 baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://joshisa.ninja" # the base hostname & protocol for your site, e.g. http://example.com
 
@@ -38,8 +38,6 @@ plugins:
   - jekyll-sitemap
   - jekyll-admin
   - jekyll-archives
-  #- jekyll-postcss
-  #- jekyll-purgecss
 
 jekyll-archives:
   enabled:
@@ -52,6 +50,7 @@ jekyll-archives:
     month: "/:year/:month/"
     day: "/:year/:month/:day/"
 
+# This is a hack to get drafts to show up in jekyll-admin
 collections:
   - drafts
 

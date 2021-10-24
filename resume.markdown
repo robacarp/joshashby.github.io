@@ -1,6 +1,6 @@
 ---
 title: Resume
-layout: prose
+layout: default 
 permalink: "/resume/"
 ---
 

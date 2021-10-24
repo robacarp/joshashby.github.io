@@ -4,7 +4,7 @@
 <body>
   {% include nav.html %}
 
-  <main>
+  <main class="mt-0 lg:mt-5">
     {% if page.type == "year" %}
     <h4>Archive of posts written in {{ page.date | date: "%Y" }}</h4>
     {% elsif page.type == "month" %}
@@ -23,6 +23,8 @@
     </ul>
 
     {{ content }}
+
+    {% include content_footer.html %}
   </main>
 
   {% include footer.html %}
