@@ -36,7 +36,6 @@
       <ul class="nav-list">
         <li class="nav-item"><a href="/posts/">Posts</a></li>
         <li class="nav-item"><a href="/photos/">Photos</a></li>
-        <li class="nav-item"><a href="/about/">About</a></li>
         <li class="nav-item"><a href="/resume/">Resume</a></li>
 
         
@@ -65,14 +64,19 @@ document.querySelectorAll("[data-behavior~=toggle-hidden]").forEach(elem => {
 </script>
 
 
-  <main>
+  <main class="mt-0 lg:mt-5">
     <header id="page-header">
-      <div class="flex flex-col">
+      <div class="flex flex-col space-y-4">
         <h1>Using Github Actions to build a Jekyll 4 site and host it on Github Pages</h1>
-        <div>
-          <div class="mt-2 flex items-center text-sm leading-5 text-gray-500 sm:mr-6 font-sans">
+
+        <div class="flex flex-row space-x-2 items-center">
+          <div class="flex items-center space-x-1 text-sm leading-5 text-gray-500 sm:mr-6 font-sans">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
             <time datetime="2020-10-14">2020-Oct-14</time>
+          </div>
+
+          <div class="flex flex-col space-y-1 md:flex-row md:space-x-1">
+            
           </div>
         </div>
       </div>
@@ -208,6 +212,14 @@ document.querySelectorAll("[data-behavior~=toggle-hidden]").forEach(elem => {
 <p>And that’s it! It might look like a lot all spaced out like this, but it’s a fairly simple setup that is still powerful and expandable as you add more features to your site such as photograph processing, javascript resource processing or html cleanup in <code class="language-plaintext highlighter-rouge">./build</code> before publishing.</p>
 
     </article>
+
+    <footer class="border-t-2 border-blue-700 my-4 pt-4 text-sm w-full">
+  <p class="prose-xs">
+    Found an error or have an improvement?
+    <a href="https://github.com/JoshAshby/joshashby.github.io/tree/source/_posts/2020-10-14-using-github-actions-to-build-a-jekyll-4-site-and-host-it-on-github-pages.md">Suggest a correction!</a> | <span class="text-gray-300 text-xs">© Joshua Ashby</span>
+  </p>
+</footer>
+
   </main>
 
   
