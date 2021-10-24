@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Browser Extension with Rollup - Omnibox Chatter - Josh Ashby</title>
+  <meta name="description" content="">
+
+  <link type="application/atom+xml" rel="alternate" href="https://joshisa.ninja/feed.xml" title="Ashby's Hideout" />
+  <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Browser Extension with Rollup - Omnibox Chatter | Ashby’s Hideout</title>
+<meta name="generator" content="Jekyll v4.2.1" />
+<meta property="og:title" content="Browser Extension with Rollup - Omnibox Chatter" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This post contains inline annotations/footnotes to help add context, helpful tips or expand upon a tangent in the text. Expand them by clicking or tapping on them Annotations might have their own annotationsSuch as this one! inside of them too." />
+<meta property="og:description" content="This post contains inline annotations/footnotes to help add context, helpful tips or expand upon a tangent in the text. Expand them by clicking or tapping on them Annotations might have their own annotationsSuch as this one! inside of them too." />
+<link rel="canonical" href="https://joshisa.ninja/2021/10/22/browser-extension-with-rollup-omnibox-chatter.html" />
+<meta property="og:url" content="https://joshisa.ninja/2021/10/22/browser-extension-with-rollup-omnibox-chatter.html" />
+<meta property="og:site_name" content="Ashby’s Hideout" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-10-22T00:00:00+00:00" />
+<script type="application/ld+json">
+{"description":"This post contains inline annotations/footnotes to help add context, helpful tips or expand upon a tangent in the text. Expand them by clicking or tapping on them Annotations might have their own annotationsSuch as this one! inside of them too.","url":"https://joshisa.ninja/2021/10/22/browser-extension-with-rollup-omnibox-chatter.html","@type":"BlogPosting","headline":"Browser Extension with Rollup - Omnibox Chatter","dateModified":"2021-10-22T00:00:00+00:00","datePublished":"2021-10-22T00:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://joshisa.ninja/2021/10/22/browser-extension-with-rollup-omnibox-chatter.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+<body>
+  <section id="main-sidebar">
+  <nav class="sidebar-nav">
+    <h2><a href="/">Ashby's Hideout</a></h2>
+
+    <div id="nav-links" class="expandable">
+      <ul class="nav-list">
+        <li class="nav-item"><a href="/posts/">Posts</a></li>
+        <li class="nav-item"><a href="/photos/">Photos</a></li>
+        <li class="nav-item"><a href="/about/">About</a></li>
+        <li class="nav-item"><a href="/resume/">Resume</a></li>
+
+        
+      </ul>
+    </div>
+
+    <div class="hamburger-bun">
+      <button class="nav-item" data-behavior="toggle-hidden" data-target="#nav-links">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+    </div>
+
+    <!--<div class="flex flex-row content-center justify-between self-center w-full px-4 lg:flex-col lg:items-center">-->
+    <!--</div>-->
+  </nav>
+</section>
+
+<script>
+document.querySelectorAll("[data-behavior~=toggle-hidden]").forEach(elem => {
+  const dataTarget = document.querySelector(elem.dataset.target)
+
+  elem.addEventListener("click", e => {
+    dataTarget.classList.toggle("expand")
+  })
+})
+</script>
+
+
+  <main>
+    <header id="page-header">
+      <div class="flex flex-col">
+        <h1>Browser Extension with Rollup - Omnibox Chatter</h1>
+        <div>
+          <div class="mt-2 flex items-center text-sm leading-5 text-gray-500 sm:mr-6 font-sans">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            <time datetime="2021-10-22">2021-Oct-22</time>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <article class="post prose">
+      <p><em>
+This post contains inline annotations/footnotes to help add context, helpful tips or expand upon a tangent in the text. Expand them by <a href="#annotation-1" class="annotation-trigger -gray">clicking or tapping on them</a>
+<span id="annotation-1" class="annotation">Annotations might have their own <a href="#annotation-2" class="annotation-trigger -red">annotations</a><span id="annotation-2" class="annotation">Such as this one!</span> inside of them too.</span></em></p>
+
+<p>In the <a href="/2021/10/16/web-extensions-with-rollup-getting-started.html">previous post</a>, we laid down the groundwork for building a browser extension using <a href="https://rollupjs.org/">Rollup.js</a> that logged “Hello, World!” out to the extensions background page’s console. Today we’ll take that idea a little further and start to tie into the browser’s “Omnibox,” which will let the browser give our extension the users input into the URL bar after they’ve entered a keyword with which we’ll register in the extensions <code class="language-plaintext highlighter-rouge">manifest.json</code>. As part of this, we’ll set up TypeScript,</p>
+
+<p>As a reminder of what we’re building through this series: A simple browser extension that allows for the creation of “aliases” via the URL bar, e.g., if the browser extension registers <code class="language-plaintext highlighter-rouge">goto</code> as the keyword, the user could set up the alias <code class="language-plaintext highlighter-rouge">github/me</code> to go to their GitHub profile and type in <code class="language-plaintext highlighter-rouge">goto github/me</code> to the URL bar to make use of the alias; Similar to <a href="https://github.com/einaregilsson/Redirector">Redirector</a>.</p>
+
+<p>Along the way, we’ll cover an introduction to browser extensions, talk about making them function under both Chrome and Firefox with minimal changes and how to use tools like Rollup.js to help bundle one.</p>
+
+<p class="callout blue">While I’m writing these posts using my own preferences on techniques and technologies (which include Rollup.js as well as <a href="https://www.typescriptlang.org/">TypeScript</a>, <a href="https://svelte.dev/">Svelte</a>), there are a lot of alternative approaches, and it’s the concepts that are the core take away. Nothing precludes you from using different technologies; if you’d like to follow along using Vanilla ES6+ and <a href="https://esbuild.github.io/">esbuild</a>, or any other number of setups, <a href="#annotation-3" class="annotation-trigger -purple">go right ahead!</a>
+<span id="annotation-3" class="annotation">For example, I’ve been meaning to mess around with <a href="https://www.solidjs.com/">Solid.js</a> or <a href="https://rescript-lang.org/">Rescript w/ React</a>. Maybe even replace Rollup.js with esbuild or <a href="https://swc.rs/">swc</a>. All of which shouldn’t be too difficult to adapt this series for.</span></p>
+
+<h3 id="typescript">TypeScript</h3>
+
+<p>As I eluded to above, this step is optional. Still, I personally find that TypeScript (TS) makes it easier for me to come back to projects after a long hiatus, helps eliminate several common bug types resulting from duck typing and generally helps speed up my development. TypeScript is easy to convert to JavaScript by removing the types (the occasional enum might need some tweaks to make it an object, too, but that shouldn’t be a show stopper). Even if TypeScript is not your cup of tea, it should be easy to follow along still.</p>
+
+<p>We’ll need both TypeScript as well as the Rollup TypeScript plugin:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm add <span class="nt">--save-dev</span> @rollup/plugin-typescript typescript
+</code></pre></div></div>
+
+<p>Then we’ll need to add the plugin to our <code class="language-plaintext highlighter-rouge">rollup.config.js</code>, add the import somewhere near the top:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><div class="emphasized"><span class="k">import</span> <span class="nx">copy</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">rollup-plugin-copy</span><span class="dl">"</span>
+
+<span class="hll"><span class="k">import</span> <span class="nx">typescript</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@rollup/plugin-typescript</span><span class="dl">"</span>
+</span>
+<span class="kd">const</span> <span class="nx">production</span> <span class="o">=</span> <span class="o">!</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">ROLLUP_WATCH</span></div></code></pre></figure>
+
+<p>And set up the plugin after the <code class="language-plaintext highlighter-rouge">commonjs</code> plugin:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><div class="emphasized">      <span class="nx">resolve</span><span class="p">({</span> <span class="na">browser</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">preferBuiltins</span><span class="p">:</span> <span class="kc">false</span> <span class="p">}),</span>
+      <span class="nx">commonjs</span><span class="p">(),</span>
+
+<span class="hll">      <span class="nx">typescript</span><span class="p">({</span> <span class="na">sourceMap</span><span class="p">:</span> <span class="o">!</span><span class="nx">production</span><span class="p">,</span> <span class="na">inlineSources</span><span class="p">:</span> <span class="o">!</span><span class="nx">production</span> <span class="p">}),</span>
+</span>
+      <span class="nx">copy</span><span class="p">({</span></div></code></pre></figure>
+
+<p>We’re configuring the source maps to generate in development builds and telling TypeScript to <a href="https://www.typescriptlang.org/tsconfig/#inlineSources">inline the original TS source</a> into the source map. I find the inlining of the source helps the browsers to be able to display the source and line/column numbering <a href="#annotation-4" class="annotation-trigger -gray">without issue.</a>
+<span id="annotation-4" class="annotation">Without needing to set up a source directory mapping, something I’ve never had function well. YMMV.</span></p>
+
+<p>Next, we’ll add the start of our <code class="language-plaintext highlighter-rouge">tsconfig.json</code>. You can do this in several ways, such as running <code class="language-plaintext highlighter-rouge">npm exec tsc -- --init</code>, but I have a starter version that I use, which closely aligns with the Svelte TSConfig (which we’ll make use of in a future post) and plays nicely with Rollup:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"exclude"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"node_modules/*"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"dist/*"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"web-ext/*"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ext-dev/*"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"include"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"src/**/*.ts"</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"compilerOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"strict"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"es2020"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"module"</span><span class="p">:</span><span class="w"> </span><span class="s2">"es2020"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"moduleResolution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"isolatedModules"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"esModuleInterop"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"allowSyntheticDefaultImports"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"forceConsistentCasingInFileNames"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"resolveJsonModule"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"skipLibCheck"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>For a reference on all the options available, please refer to the <a href="https://www.typescriptlang.org/tsconfig"><code class="language-plaintext highlighter-rouge">tsconfig.json</code> docs</a>.</p>
+
+<p>We’ll need to also adjust our <code class="language-plaintext highlighter-rouge">src/background/index.js</code> to be a TypeScript file. Rename it to <code class="language-plaintext highlighter-rouge">src/background/index.ts</code>, then add <code class="language-plaintext highlighter-rouge">export default undefined</code> to the end. You might want to change up the <code class="language-plaintext highlighter-rouge">console.log</code> message as well if you’d like to see that TypeScript is working.</p>
+
+<p>Why do we need <code class="language-plaintext highlighter-rouge">export default undefined</code>? We’ve configured TypeScript with <a href="https://www.typescriptlang.org/tsconfig#isolatedModules"><code class="language-plaintext highlighter-rouge">isolatedModules</code></a> turned on, which we’ll need for Svelte in future posts as the Svelte pre-processor that handles TypeScript in Svelte files only works on a file-by-file basis and, as the <code class="language-plaintext highlighter-rouge">isolatedModules</code>  docs say:</p>
+
+<blockquote>
+  <p>[…] other transpilers only operate on a single file at a time, which means they can’t apply code transforms that depend on understanding the full type system.</p>
+</blockquote>
+
+<p>Without this, you might see this warning pop up in the Rollup output:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rollup v2.52.7
+bundles src/background/index.ts → dist/background...
+(!) Plugin typescript: @rollup/plugin-typescript TS1208: 'index.ts' cannot be compiled under '--isolatedModules' because it is considered a global script file. Add an import, export, or an empty 'export {}' statement to make it a module.
+src/background/index.ts: (1:1)
+
+1 console.log("Hello, World! From TS!")
+  ~~~~~~~
+
+created dist/background in 1s
+
+[2021-10-23 20:12:54] waiting for changes...
+</code></pre></div></div>
+
+<p>One last change that we need to make is to change the extension in the <code class="language-plaintext highlighter-rouge">input</code> for the background page’s entry point to <code class="language-plaintext highlighter-rouge">.ts</code> so that Rollup can find the file correctly:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><div class="emphasized"><span class="k">export</span> <span class="k">default</span> <span class="p">[</span>
+  <span class="p">{</span>
+<span class="hll">    <span class="na">input</span><span class="p">:</span> <span class="dl">"</span><span class="s2">src/background/index.ts</span><span class="dl">"</span><span class="p">,</span>
+</span>    <span class="na">output</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">sourcemap</span><span class="p">:</span> <span class="o">!</span><span class="nx">production</span><span class="p">,</span>
+      <span class="na">dir</span><span class="p">:</span> <span class="dl">"</span><span class="s2">dist/background/</span><span class="dl">"</span><span class="p">,</span>
+      <span class="na">format</span><span class="p">:</span> <span class="dl">"</span><span class="s2">esm</span><span class="dl">"</span><span class="p">,</span>
+    <span class="p">},</span></div></code></pre></figure>
+
+<p>Now <code class="language-plaintext highlighter-rouge">npm run start:rollup</code> should run without issue, and <a href="#annotation-5" class="annotation-trigger -gray">reloading the extension</a>
+<span id="annotation-5" class="annotation">In Firefox, the debugging page that we used to load the extension in the previous post, <code class="language-plaintext highlighter-rouge">about:debugging#/runtime/this-firefox</code>, will display a small “Reload” button on the bottom right corner of the extensions card:<img src="/assets/2021-10-22-browser-extension-with-rollup-omnibox-chatter/firefox-reload.png" alt="" />For Chrome, the extensions page that we used to load the unpacked extension, <code class="language-plaintext highlighter-rouge">chrome://extensions/</code>, will display a small “Reload” <em>icon</em> button on the bottom right corner of the extensions card:<img src="/assets/2021-10-22-browser-extension-with-rollup-omnibox-chatter/chrome-reload.png" alt="" /></span>
+ in your browser should cause your <code class="language-plaintext highlighter-rouge">console.log</code> message to show up as before:</p>
+
+<p><img src="/assets/2021-10-22-browser-extension-with-rollup-omnibox-chatter/typescript-console.png" alt="" /></p>
+
+<p>Not only that, the browser should correctly show the original filename, <code class="language-plaintext highlighter-rouge">index.ts</code> and even the original TS file’s source!</p>
+
+<h3 id="polyfills">Polyfills</h3>
+
+<p>Before we get any further, we’re going to add a polyfill for the browser extensions API that Mozilla provides, allowing us to use the <code class="language-plaintext highlighter-rouge">browser</code> promise-based APIs, even while running the browser extension in Chrome.</p>
+
+<p>Why do we need such a thing, you might ask? Great question! As it turns out, Chrome’s browser extension API is an <a href="#annotation-6" class="annotation-trigger -gray">older generation</a>
+<span id="annotation-6" class="annotation">The OG, in fact!</span>
+ and makes use of a <code class="language-plaintext highlighter-rouge">chrome</code> namespace (ie: <code class="language-plaintext highlighter-rouge">chrome.storage.sync</code>) which uses callbacks for async operations.</p>
+
+<p><strong>Record Scratch</strong> Yes, I did just say “callbacks for async operations.” Yes, we’re in a post ES6 world where JavaScript has <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">promises</a> and <code class="language-plaintext highlighter-rouge">async</code>/<code class="language-plaintext highlighter-rouge">await</code> keywords for working with them in a friendly, <em>synchronous like</em> fashion that solves a significant amount of the problems that lead to, and result from, Callback Hell.</p>
+
+<p>On the other hand, Firefox ships with a <a href="#annotation-7" class="annotation-trigger -gray">more modern</a>
+<span id="annotation-7" class="annotation">And maybe soon <a href="https://www.w3.org/community/webextensions/">standards track</a></span>
+, generation of the original Chrome API. This version lives under the <code class="language-plaintext highlighter-rouge">browser</code> namespace and uses promises for async operations. Thankfully, the fine folks at Mozilla maintain a <a href="https://github.com/mozilla/webextension-polyfill">polyfill</a> for Chrome which allows you to use the <code class="language-plaintext highlighter-rouge">browser</code> and promise-based API’s so we can write modern code once that runs on both browsers.</p>
+
+<p>Add it to our dependencies with <code class="language-plaintext highlighter-rouge">npm add</code> like always (I’m not saving it under the dev dependencies this time, as it’s a required runtime module that we’ll actively import into our code):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm add webextension-polyfill
+</code></pre></div></div>
+
+<p>To test it out, we’ll make use of the <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/runtime/id"><code class="language-plaintext highlighter-rouge">browser.runtime.id</code></a> call in our <code class="language-plaintext highlighter-rouge">console.log</code>, which should print out a nice random string that <a href="#annotation-8" class="annotation-trigger -gray">represents the ID of the extension.</a>
+<span id="annotation-8" class="annotation">This is customizable in Firefox, via the <code class="language-plaintext highlighter-rouge">browser_specific_settings.gecko.id</code> property of the manifest, the docs for which are <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/browser_specific_settings">found here</a>.</span>
+ Update <code class="language-plaintext highlighter-rouge">src/background/index.ts</code> file to look like the following:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">browser</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">webextension-polyfill</span><span class="dl">"</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Hello, World! From TS! </span><span class="p">${</span><span class="nx">browser</span><span class="p">.</span><span class="nx">runtime</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="the-trouble-with-tribbles-types">The Trouble with <del>Tribbles</del> Types</h4>
+
+<p>If you’re using TypeScript, you might notice this fun warning show up in the Rollup output, and you might have an error in your editor for the same issue:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(!) Plugin typescript: @rollup/plugin-typescript TS7016: Could not find a declaration file for module 'webextension-polyfill'. '/Users/joshashby/repos/personal/svelte-web-extension-tutorial/node_modules/webextension-polyfill/dist/browser-polyfill.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/webextension-polyfill` if it exists or add a new declaration (.d.ts) file containing `declare module 'webextension-polyfill';`
+</code></pre></div></div>
+
+<p>This is where I found things get a little hairy right now. There are a <a href="https://www.npmjs.com/package/@types/webextension-polyfill">couple of</a> <a href="https://www.npmjs.com/package/web-ext-types">packges</a> that supply types for the <code class="language-plaintext highlighter-rouge">browser</code> API’s and for the <a href="#annotation-9" class="annotation-trigger -gray">polyfill</a>
+<span id="annotation-9" class="annotation"><code class="language-plaintext highlighter-rouge">@types/webextension-polyfill</code> Sounds great at first, but I’ve found it has some missing or oddly typed APIs and many instances of various objects being a nebulous <code class="language-plaintext highlighter-rouge">any</code>, which isn’t super helpful for a well-defined set of APIs like this.</span>
+, however the most complete and up-to-date one that I use is <a href="https://www.npmjs.com/package/@types/firefox-webext-browser"><code class="language-plaintext highlighter-rouge">@types/firefox-webext-browser</code></a>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm add <span class="nt">--save-dev</span> @types/firefox-webext-browser
+</code></pre></div></div>
+
+<p>Unfortunately, installing this package doesn’t get you very far. The import error for <code class="language-plaintext highlighter-rouge">webextension-polyfill</code> will remain, as this package only declares types for a global <code class="language-plaintext highlighter-rouge">browser</code> object. This also has the downside of TypeScript thinking <code class="language-plaintext highlighter-rouge">browser</code> is defined, regardless of if you’ve remembered to import <code class="language-plaintext highlighter-rouge">webextension-polyfill</code> or not. So how do we get around this?</p>
+
+<p>Well … We hack it. This is the real ugly bit and abuses TypeScript a bit, but we’re going to make an <a href="https://www.typescriptlang.org/docs/handbook/namespaces.html#working-with-other-javascript-libraries">ambient definition</a>, by creating a <code class="language-plaintext highlighter-rouge">src/polyfill-types.d.ts</code> file with the following contents:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="kd">type</span> <span class="nx">browser</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@types/firefox-webext-browser</span><span class="dl">"</span>
+
+<span class="kr">declare</span> <span class="kr">module</span> <span class="dl">"</span><span class="s2">webextension-polyfill</span><span class="dl">"</span> <span class="p">{</span>
+  <span class="k">export</span> <span class="k">default</span> <span class="nx">browser</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>We use an ambient <code class="language-plaintext highlighter-rouge">.d.ts</code> file since TypeScript will pick it up without any additional work from us, and we define the default export of the polyfill as being typed by the type export of the <code class="language-plaintext highlighter-rouge">@types/firefox-webext-browser</code> package.</p>
+
+<p>With this out of the way, the TypeScript warning should resolve, and reloading the extension should yield our new <code class="language-plaintext highlighter-rouge">console.log</code> message:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello, World! From TS! e7f1b7ad5057a435952272be6270dbf6b16867fe@temporary-addon
+</code></pre></div></div>
+
+<h3 id="so-whats-the-omnibox">So, What’s the Omnibox?</h3>
+
+<p>Now that we have our polyfill in place (and some of you have TypeScript up and running), we can get on with our original goal for today: Integrating with the <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/omnibox">Omnibox</a> (The Omnibox might be more recognizable to you as the URL bar) and browser extensions are allowed to register a keyword with the browser, which, when typed into the Omnibox, will cause the browser to begin sending the contents of the Omnibox to your extension.</p>
+
+<p>To get started, we’ll follow the directions of the Omnibox docs and add an <code class="language-plaintext highlighter-rouge">omnibox</code> section to our <code class="language-plaintext highlighter-rouge">manifest.json</code>, where we’ll also <a href="#annotation-10" class="annotation-trigger -gray">define our keyword.</a>
+<span id="annotation-10" class="annotation">I chose <code class="language-plaintext highlighter-rouge">vrm</code>, short for <code class="language-plaintext highlighter-rouge">vroom</code>, but this can be just about any word</span></p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><div class="emphasized"><span class="w">  </span><span class="nl">"background"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="s2">"background/index.html"</span>
+<span class="w">  </span><span class="p">}</span><span class="err">,</span>
+<span class="hll"><span class="w">  </span><span class="nl">"omnibox"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span class="hll"><span class="w">    </span><span class="nl">"keyword"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vrm"</span>
+</span><span class="hll"><span class="w">  </span><span class="p">}</span>
+</span><span class="p">}</span></div></code></pre></figure>
+
+<p>With this in place, we can now start hooking up to the <code class="language-plaintext highlighter-rouge">omnibox</code> API. We’ll use the extension’s background page to register event listeners and handle the subsequent events since the background page will run at all times and has the highest level of permissions for accessing parts of the browser extension API.</p>
+
+<p>This API <a href="#annotation-11" class="annotation-trigger -gray">is event-driven</a>
+<span id="annotation-11" class="annotation">The browser extension APIs where an extension might react to something happening in the browser are all exposed as events, using the same interface consisting of the functions <code class="language-plaintext highlighter-rouge">addEventListener</code>, <code class="language-plaintext highlighter-rouge">hasEventListener</code>/<code class="language-plaintext highlighter-rouge">hasEventListeners</code> and <code class="language-plaintext highlighter-rouge">removeEventListener</code>, which all take a callback function which is the event subscriber.</span>
+, and in particular, for the <code class="language-plaintext highlighter-rouge">omnibox</code>, there are 4 events we can listen for:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">onInputStarted</code> Called with no arguments when the user has typed in the full keyword followed by a space</li>
+  <li><code class="language-plaintext highlighter-rouge">onInputChanged</code> Called with the current input and a callback that allows setting suggestions</li>
+  <li><code class="language-plaintext highlighter-rouge">onInputEntered</code> Called when the user accepts one of the suggestions</li>
+  <li><code class="language-plaintext highlighter-rouge">onInputCancelled</code> Called when the user escapes/closes the omnibox</li>
+</ul>
+
+<p>We’ll only use <code class="language-plaintext highlighter-rouge">onInputChanged</code> and <code class="language-plaintext highlighter-rouge">onInputEntered</code> for our extension, but to demonstrate the others and get a sense of how this API works, we’ll add some basic logging. Add the following to the end of <code class="language-plaintext highlighter-rouge">src/background/index.ts</code>:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">browser</span><span class="p">.</span><span class="nx">omnibox</span><span class="p">.</span><span class="nx">onInputStarted</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Input started</span><span class="dl">"</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="nx">browser</span><span class="p">.</span><span class="nx">omnibox</span><span class="p">.</span><span class="nx">onInputChanged</span><span class="p">.</span><span class="nx">addListener</span><span class="p">((</span><span class="nx">input</span><span class="p">,</span> <span class="nx">suggest</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Input changed! </span><span class="p">${</span><span class="nx">input</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span>
+  
+  <span class="nx">suggest</span><span class="p">([</span>
+    <span class="p">{</span> <span class="na">content</span><span class="p">:</span> <span class="dl">"</span><span class="s2">s1</span><span class="dl">"</span><span class="p">,</span> <span class="na">description</span><span class="p">:</span> <span class="dl">"</span><span class="s2">This is suggestion 1</span><span class="dl">"</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="na">content</span><span class="p">:</span> <span class="dl">"</span><span class="s2">s2</span><span class="dl">"</span><span class="p">,</span> <span class="na">description</span><span class="p">:</span> <span class="dl">"</span><span class="s2">This is suggestion 2</span><span class="dl">"</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="na">content</span><span class="p">:</span> <span class="dl">"</span><span class="s2">s3</span><span class="dl">"</span><span class="p">,</span> <span class="na">description</span><span class="p">:</span> <span class="dl">"</span><span class="s2">This is suggestion 3</span><span class="dl">"</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="na">content</span><span class="p">:</span> <span class="dl">"</span><span class="s2">s4</span><span class="dl">"</span><span class="p">,</span> <span class="na">description</span><span class="p">:</span> <span class="dl">"</span><span class="s2">This is suggestion 4</span><span class="dl">"</span> <span class="p">},</span>
+  <span class="p">])</span>
+<span class="p">})</span>
+
+<span class="nx">browser</span><span class="p">.</span><span class="nx">omnibox</span><span class="p">.</span><span class="nx">onInputEntered</span><span class="p">.</span><span class="nx">addListener</span><span class="p">((</span><span class="nx">suggestion</span><span class="p">,</span> <span class="nx">disposition</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Input entered! </span><span class="p">${</span><span class="nx">suggestion</span><span class="p">}</span><span class="s2"> should open in </span><span class="p">${</span><span class="nx">disposition</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="nx">browser</span><span class="p">.</span><span class="nx">omnibox</span><span class="p">.</span><span class="nx">onInputCancelled</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Input cancelled</span><span class="dl">"</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>After reloading the extension, by typing in your keyword to the URL bar, you should trigger the logging statements and see the suggestions we put in place.</p>
+
+<h5 id="firefox">Firefox</h5>
+<p><img src="/assets/2021-10-22-browser-extension-with-rollup-omnibox-chatter/firefox-omnibox-test.png" alt="" /></p>
+
+<p><img src="/assets/2021-10-22-browser-extension-with-rollup-omnibox-chatter/firefox-omnibox-console.png" alt="" /></p>
+
+<h5 id="chrome">Chrome</h5>
+<p><img src="/assets/2021-10-22-browser-extension-with-rollup-omnibox-chatter/chrome-omnibox-test.png" alt="" /></p>
+
+<p><img src="/assets/2021-10-22-browser-extension-with-rollup-omnibox-chatter/chrome-omnibox-console.png" alt="" /></p>
+
+<p>The heart of what we’ll be expanding upon in future posts of this series is this little bit with <code class="language-plaintext highlighter-rouge">suggest</code> here:</p>
+
+<figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><div class="emphasized"><span class="nx">browser</span><span class="p">.</span><span class="nx">omnibox</span><span class="p">.</span><span class="nx">onInputChanged</span><span class="p">.</span><span class="nx">addListener</span><span class="p">((</span><span class="nx">text</span><span class="p">,</span> <span class="nx">suggest</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Input changed! </span><span class="p">${</span><span class="nx">text</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span>
+  
+<span class="hll">  <span class="nx">suggest</span><span class="p">([</span>
+</span><span class="hll">    <span class="p">{</span> <span class="na">content</span><span class="p">:</span> <span class="dl">"</span><span class="s2">s1</span><span class="dl">"</span><span class="p">,</span> <span class="na">description</span><span class="p">:</span> <span class="dl">"</span><span class="s2">This is suggestion 1</span><span class="dl">"</span> <span class="p">},</span>
+</span><span class="hll">    <span class="p">{</span> <span class="na">content</span><span class="p">:</span> <span class="dl">"</span><span class="s2">s2</span><span class="dl">"</span><span class="p">,</span> <span class="na">description</span><span class="p">:</span> <span class="dl">"</span><span class="s2">This is suggestion 2</span><span class="dl">"</span> <span class="p">},</span>
+</span><span class="hll">    <span class="p">{</span> <span class="na">content</span><span class="p">:</span> <span class="dl">"</span><span class="s2">s3</span><span class="dl">"</span><span class="p">,</span> <span class="na">description</span><span class="p">:</span> <span class="dl">"</span><span class="s2">This is suggestion 3</span><span class="dl">"</span> <span class="p">},</span>
+</span><span class="hll">    <span class="p">{</span> <span class="na">content</span><span class="p">:</span> <span class="dl">"</span><span class="s2">s4</span><span class="dl">"</span><span class="p">,</span> <span class="na">description</span><span class="p">:</span> <span class="dl">"</span><span class="s2">This is suggestion 4</span><span class="dl">"</span> <span class="p">},</span>
+</span><span class="hll">  <span class="p">])</span>
+</span><span class="p">})</span></div></code></pre></figure>
+
+<p>Listeners for <code class="language-plaintext highlighter-rouge">onInputChanged</code> receive two arguments, <code class="language-plaintext highlighter-rouge">text</code> and <code class="language-plaintext highlighter-rouge">suggest</code>. <code class="language-plaintext highlighter-rouge">text</code> is the full text, minus the keyword and space, that the user has typed, while <code class="language-plaintext highlighter-rouge">suggest</code> is a callback that accepts an array of <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/omnibox/SuggestResult"><code class="language-plaintext highlighter-rouge">SuggestResult</code></a>. A <code class="language-plaintext highlighter-rouge">SuggestResult</code> is just an object with two properties, <code class="language-plaintext highlighter-rouge">content</code> and <code class="language-plaintext highlighter-rouge">description</code>. <code class="language-plaintext highlighter-rouge">description</code> is, understandably, only for the users, however <code class="language-plaintext highlighter-rouge">content</code> represents the actual “value” of the suggestion, and if the user were to accept that suggestion, <code class="language-plaintext highlighter-rouge">content</code> is what the extension will receive in it’s <code class="language-plaintext highlighter-rouge">onInputEntered</code> listener.</p>
+
+<p>In the future, we’ll use this bit of knowledge to build out our alias functionality, displaying matching aliases and the URL that they map to as the description.</p>
+
+<h2 id="wrapping-up">Wrapping Up</h2>
+
+<p>We laid down some good foundations for building our extension, but it still doesn’t do much; Currently, it registers a keyword with the browser for the Omnibox and prints out the events to the console. In the next post, we’ll finish the last bit of setup for a while: installing and configuring Svelte, and then use it to make a basic settings page. After that, we’ll be able to start interacting with the browser extension <code class="language-plaintext highlighter-rouge">storage</code> APIs to read/write our aliases. Finally, we’ll be able to hook up our work here with the <code class="language-plaintext highlighter-rouge">omnibox</code> API to our new settings to be able to suggest, and act upon, those aliases!</p>
+
+    </article>
+  </main>
+
+  
+<script src="/vite/assets/application.9fe47965.js" crossorigin="anonymous" type="module"></script>
+
+<link href="/vite/assets/application.cb0e24fd.css" rel="stylesheet" media="screen" crossorigin="anonymous"/>
+
+</body>
+</html>
