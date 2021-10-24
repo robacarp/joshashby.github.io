@@ -1,6 +1,6 @@
 ---
 title: Resume
-layout: default
+layout: prose
 permalink: "/resume/"
 ---
 
@@ -16,7 +16,9 @@ _Software Engineer_
 **Technologies:** Elixir, Phoenix, TypeScript, ReactJS, Postgres, Terraform, AWS, Bash  
 
 * Built and maintained a number of Elixir projects, including greenfield and existing ones
-  - Made use of the JSON:API spec for API's and built out administrative panels
+* Maintained and implemented new features in React projects
+* Made use of JSON:API and GraphQL for a variety of API's
+* Built out administrative panels
 * Managed DevOps on AWS infastructure with Terraform
   
   
