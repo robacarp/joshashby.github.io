@@ -226,6 +226,7 @@ a.annotation-trigger:visited {
 
 a.annotation-trigger::after {
   content: " [+]";
+  font-family: monospace;
   font-size: 0.75em;
   vertical-align: middle;
 }
