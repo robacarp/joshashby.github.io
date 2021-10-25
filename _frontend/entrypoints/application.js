@@ -6,9 +6,9 @@
 
 // Example: Import a stylesheet in <sourceCodeDir>/index.css
 // import '~/index.css'
-import "~/css/default.css"
-import "~/css/jashby.css"
-import "~/css/syntax.css"
+//import "~/css/default.css"
+//import "~/css/jashby.css"
+//import "~/css/syntax.css"
 
 function annotation(node) {
   node.addEventListener("click", e => {
