@@ -35,7 +35,7 @@ permalink: "/posts/"
       </div>
       <div class="flex flex-row space-x-1">
         {% for tag in post.tags %}
-          <a href="/tags/#{{ tag | slugify }}" name="{{ tag }}"><span class="tag">{{ tag }}</span></a>
+          <a href="/tags#{{ tag | slugify }}" name="{{ tag }}"><span class="tag">{{ tag }}</span></a>
         {% endfor %}
       </div>
     </div>

@@ -4,7 +4,7 @@ title: Home of Ashby
 
 # Hello!
 
-I'm [Ashby](/about/), a [software dev](https://github.com/JoshAshby) but occasionally I [take photos](/photos/) or worse [write](/posts/).
+I'm Ashby, a [software dev](https://github.com/JoshAshby) but occasionally I [take photos](/photos/) or worse [write](/posts/).
 
 Looking to get a hold of me?
  - Shoot me an email at `me (at) joshashby.com`
@@ -24,7 +24,7 @@ Looking to get a hold of me?
       </div>
       <div class="flex flex-row space-x-1">
         {% for tag in post.tags %}
-          <a href="/tags/#{{ tag | slugify }}" name="{{ tag }}"><span class="tag">{{ tag }}</span></a>
+          <a href="/tags#{{ tag | slugify }}" name="{{ tag }}"><span class="tag">{{ tag }}</span></a>
         {% endfor %}
       </div>
     </div>

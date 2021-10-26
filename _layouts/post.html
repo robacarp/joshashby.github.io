@@ -13,7 +13,7 @@ layout: default
 
       <div class="flex flex-row flex-wrap space-y-1 md:space-x-1 md:space-y-0 items-center">
         {% for tag in page.tags %}
-          <a href="/tags/#{{ tag | slugify }}" name="{{ tag }}"><span class="tag">{{ tag }}</span></a>
+          <a href="/tags#{{ tag | slugify }}" name="{{ tag }}"><span class="tag">{{ tag }}</span></a>
         {% endfor %}
       </div>
     </div>
