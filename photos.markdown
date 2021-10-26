@@ -1,6 +1,5 @@
 ---
 title: Photos
-layout: default
 permalink: "/photos/"
 ---
 
@@ -15,10 +14,11 @@ warned :)
 <hr/>
 
 {%for photo in site.data.photographs.photographs %}
-<figure>
-<img src="{{site.data.photographs.cdn}}/{{photo.slug}}-800.jpg" srcset="{{site.data.photographs.cdn}}/{{photo.slug}}-400.jpg 400w, {{site.data.photographs.cdn}}/{{photo.slug}}-600.jpg 600w, {{site.data.photographs.cdn}}/{{photo.slug}}-800.jpg 800w, {{site.data.photographs.cdn}}/{{photo.slug}}-1000.jpg 1000w" alt="{{photo.title}}"/>
-{% if photo.description %}
-<figcaption>{{photo.description}}</figcaption>
-{% endif %}
-</figure>
+  <figure>
+    <img src="{{site.data.photographs.cdn}}/{{photo.slug}}-800.jpg" srcset="{{site.data.photographs.cdn}}/{{photo.slug}}-400.jpg 400w, {{site.data.photographs.cdn}}/{{photo.slug}}-600.jpg 600w, {{site.data.photographs.cdn}}/{{photo.slug}}-800.jpg 800w, {{site.data.photographs.cdn}}/{{photo.slug}}-1000.jpg 1000w" alt="{{photo.title}}"/>
+
+    {% if photo.description %}
+      <figcaption>{{photo.description}}</figcaption>
+    {% endif %}
+  </figure>
 {% endfor %}

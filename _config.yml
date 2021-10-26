@@ -31,6 +31,20 @@ social:
   links:
     - https://github.com/JoshAshby
 
+defaults:
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+    values:
+      layout: "default"
+
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+      type: "posts"
+    values:
+      layout: "post"
+
 plugins:
   - jekyll/vite
   - jekyll-feed

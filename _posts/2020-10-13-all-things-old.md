@@ -1,7 +1,5 @@
 ---
 title: All Things Old
-layout: post
-New field 2: All Things Old
 date: '2020-10-13 14:30:00'
 tags: []
 ---

@@ -1,32 +1,26 @@
-<!doctype html>
-<html lang="en">
-{% include head.html %}
-<body>
-  {% include nav.html %}
+---
+layout: default
+---
+{% if page.type == "year" %}
+<h4>Archive of posts written in {{ page.date | date: "%Y" }}</h4>
+{% elsif page.type == "month" %}
+<h4>Archive of posts written in {{ page.date | date: "%Y-%h" }}</h4>
+{% elsif page.type == "day" %}
+<h4>Archive of posts written on {{ page.date | date: "%Y-%h-%d" }}</h4>
+{% endif %}
 
-  <main class="mt-0 lg:mt-5">
-    {% if page.type == "year" %}
-    <h4>Archive of posts written in {{ page.date | date: "%Y" }}</h4>
-    {% elsif page.type == "month" %}
-    <h4>Archive of posts written in {{ page.date | date: "%Y-%h" }}</h4>
-    {% elsif page.type == "day" %}
-    <h4>Archive of posts written on {{ page.date | date: "%Y-%h-%d" }}</h4>
-    {% endif %}
+<section class="prose">
+  <ul>
+    {% for post in page.posts %}
+      <li>
+        <time datetime="{{ post.date | date: "%F" }}">{{ post.date | date: "%Y-%h-%d" }}</time>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+        {% for tag in page.tags %}
+          <span class="tag">{{ tag }}</span>
+        {% endfor %}
+      </li>
+    {% endfor %}
+  </ul>
 
-    <ul>
-      {% for post in page.posts %}
-        <li>
-          <time datetime="{{ post.date | date: "%F" }}">{{ post.date | date: "%Y-%h-%d" }}</time>
-          <a href="{{ post.url }}">{{ post.title }}</a>
-        </li>
-      {% endfor %}
-    </ul>
-
-    {{ content }}
-
-    {% include content_footer.html %}
-  </main>
-
-  {% include footer.html %}
-</body>
-</html>
+  {{ content }}
+</section>

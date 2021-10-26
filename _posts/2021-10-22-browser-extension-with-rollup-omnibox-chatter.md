@@ -1,5 +1,5 @@
 ---
-title: Browser Extension with Rollup - Omnibox Chatter
+title: Browser Extensions with Rollup - Omnibox Chatter
 layout: post
 tags:
 - browser-extension

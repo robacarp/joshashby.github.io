@@ -1,6 +1,5 @@
 ---
 title: Photography Gear
-layout: default
 permalink: "/photo-gear/"
 ---
 

@@ -1,16 +1,43 @@
 ---
 title: Posts
-layout: default
 permalink: "/posts/"
 ---
-
-#### Posts
-
-<ul>
+<!-- Thanks Rob -->
+{% capture post_years %}
   {% for post in site.posts %}
-    <li>
-      <time datetime="{{ post.date | date: "%F" }}">{{ post.date | date: "%Y-%h-%d" }}</time>
-      <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
+  {{ post.date | date: '%Y' }}
   {% endfor %}
-</ul>
+{% endcapture %}
+
+{% assign unique_post_years = post_years | split: " " | sort | uniq | reverse %}
+
+### By Year
+
+<p>
+  {% for year in unique_post_years %}
+    <a href="/{{year}}">{{year}}</a>
+    {% if forloop.last != true %}
+    &middot;
+    {% endif %}
+  {% endfor %}
+</p>
+
+[By Tag](/tags)
+
+#### All Posts
+
+<div class="flex flex-col space-y-8">
+  {% for post in site.posts %}
+    <div class="flex flex-col space-y-1">
+      <div class="flex flex-row space-x-2 items-baseline">
+        <time datetime="{{ post.date | date: "%F" }}" class="font-mono text-sm">{{ post.date | date: "%Y-%h-%d" }}</time>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+      </div>
+      <div class="flex flex-row space-x-1">
+        {% for tag in post.tags %}
+          <a href="/tags/#{{ tag | slugify }}" name="{{ tag }}"><span class="tag">{{ tag }}</span></a>
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+</div>
