@@ -9,7 +9,7 @@ You can find more of my photos on [my flickr](https://www.flickr.com/photos/josh
 
 {: .callout.blue}
 Most of these are of a ridiculously cute little dog named Chief. You've been
-warned :)
+warned 🙂
 
 <hr/>
 

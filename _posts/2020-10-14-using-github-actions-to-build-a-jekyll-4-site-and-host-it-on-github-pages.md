@@ -1,6 +1,9 @@
 ---
 title: Using Github Actions to build a Jekyll 4 site and host it on Github Pages
 layout: post
+tags:
+ - github actions
+ - jekyll
 ---
 
 A while back I decided that I was going to move this site from an older [Lektor](https://www.getlektor.com/) setup to [Jekyll](https://jekyllrb.com/) while retaining my Github Pages hosting setup. The reasons behind the move are little more than personal preference, but I had hoped to at least rid myself of Travis CI after being unhappy with Idera's acquisition of it.
@@ -77,6 +80,7 @@ These two actions are how we'll pull from one branch and push to another, doing 
 
 We'll need ruby, and my own setup needs node so lets get those installed.
 
+{% raw %}
 ```yaml
       - uses: actions/cache@v2
         with:
@@ -104,6 +108,7 @@ We'll need ruby, and my own setup needs node so lets get those installed.
         run: |
           yarn install
 ```
+{% endraw %}
 
 And now we'll install the dependences in `./source`. We'll use the cache actions to ensure that our dependencies are quick to install leading to faster publishing, and use the hash of the lockfiles to determine which cache to restore.
 

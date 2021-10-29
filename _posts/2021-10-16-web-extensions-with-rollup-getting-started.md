@@ -6,12 +6,7 @@ tags:
 - rollupjs
 ---
 
-<em>
-This post contains inline annotations/footnotes to help add context, helpful tips or expand upon a tangent in the text. Expand them by {% aside clicking or tapping on them %}
-Annotations might have their own {% aside annotations | red %} 
-Such as this one!
-{% endaside %} inside of them too.
-{% endaside %}
+{% include annotation_info.html %}
 	
 *Updated 2021-Oct-23 to cleanup some wording and adjust some formatting things*
 
