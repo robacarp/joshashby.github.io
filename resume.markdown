@@ -59,7 +59,7 @@ Colorado State University - Fort Collins, CO (August 2012 — May 2015)
 
 
 ### Projects
-I have a lot of side projects in a variety of languages and purposes, many of which are open sourced on my [Github](https://github.com/JoshAshby).
+I have a lot of [side projects](/projects/) in a variety of languages and purposes, many of which are open sourced on my [Github](https://github.com/JoshAshby).
 
 - [Raton](https://bones.isin.space/user/JoshAshby/repository/raton) - Open source RSS Feed Aggregator.  
   **Technologies** Svelte, TypeScript, TailwindCSS, Rollup.js  
